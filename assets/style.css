@@ -246,3 +246,15 @@ details.lst li .o{grid-column:1/-1;color:var(--muted);font-size:11.5px}
 .aviso-ex{background:#fdf1e1;color:#7a4a05;border:1px solid #f3d6a6;border-radius:8px;padding:8px 12px;font-size:12.5px}
 .btn-monday{display:block;text-align:center;text-decoration:none;background:var(--brand);color:#fff;font-weight:700;border-radius:7px;padding:10px}
 .btn-monday:hover{filter:brightness(1.08)}
+
+/* Visão por departamento */
+.dep-banner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 18px}
+.db-l{display:flex;align-items:center;gap:12px}
+.db-dot{width:14px;height:14px;border-radius:4px;background:var(--c)}
+.db-eb{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dep-banner h2{font-size:22px;color:var(--c);margin:0;line-height:1.15}
+.db-r{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:12.5px;color:var(--muted)}
+.db-r b{display:block;font-family:var(--f-num);font-size:16px;color:var(--fg)}
+.db-voltar{border:1px solid var(--line);background:var(--surface2);border-radius:6px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
+.db-voltar:hover{border-color:var(--c)}
+.nav .cnt:empty{display:none}

@@ -17,13 +17,13 @@
   <div class="brand"><span class="selo" aria-hidden="true"></span><div><b>Safra de Tomate</b><small>Goiás Verde · PCM</small></div></div>
   <nav class="nav" aria-label="Seções">
     <div class="grp">Painel</div>
-    <button type="button" id="tab-safra" data-aba="safra" aria-current="page"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Safra atual</button>
+    <button type="button" id="tab-safra" data-aba="safra" aria-current="page"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Visão geral</button>
     <button type="button" id="tab-hist" data-aba="hist" aria-current="false"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>Histórico</button>
     <div class="grp">Departamentos</div>
-    <button type="button" data-d="Mecânica"><span class="dot" style="--c:var(--mec)"></span>Mecânica</button>
-    <button type="button" data-d="Elétrica"><span class="dot" style="--c:var(--ele)"></span>Elétrica</button>
-    <button type="button" data-d="Automação"><span class="dot" style="--c:var(--aut)"></span>Automação</button>
-    <button type="button" data-d="Civil"><span class="dot" style="--c:var(--civ)"></span>Civil</button>
+    <button type="button" data-d="Mecânica" data-nav="Mecânica" aria-current="false"><span class="dot" style="--c:var(--mec)"></span>Mecânica<span class="cnt" data-cnt="Mecânica"></span></button>
+    <button type="button" data-d="Elétrica" data-nav="Elétrica" aria-current="false"><span class="dot" style="--c:var(--ele)"></span>Elétrica<span class="cnt" data-cnt="Elétrica"></span></button>
+    <button type="button" data-d="Automação" data-nav="Automação" aria-current="false"><span class="dot" style="--c:var(--aut)"></span>Automação<span class="cnt" data-cnt="Automação"></span></button>
+    <button type="button" data-d="Civil" data-nav="Civil" aria-current="false"><span class="dot" style="--c:var(--civ)"></span>Civil<span class="cnt" data-cnt="Civil"></span></button>
   </nav>
   <div class="side-foot"><b id="fonteTit">Fonte: Monday</b><span id="fonteSub">Quadro “Safra de Tomate – Preparação e Investimentos”</span></div>
 </aside>
@@ -32,7 +32,7 @@
   <header class="topbar">
     <div class="tb-l">
       <button type="button" class="menu-btn" id="menuBtn" aria-label="Abrir menu"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-      <div><div class="crumb"><span>Manutenção</span><span>Safra de Tomate</span><span id="crumbAba">Safra atual</span></div><h1 id="pgTitulo">Preparação da Safra de Tomate</h1></div>
+      <div><div class="crumb"><span>Manutenção</span><span>Safra de Tomate</span><span id="crumbAba">Visão geral</span></div><h1 id="pgTitulo">Preparação da Safra de Tomate</h1></div>
     </div>
     <div class="tb-r">
       <span class="lbl-mini">Safra</span><div class="safras" id="safras" role="group" aria-label="Escolher safra"></div>
@@ -49,12 +49,18 @@
   <main class="content">
   <div class="aba" id="aba-safra" role="region" aria-label="Safra atual">
 
+  <section class="dep-banner" id="depBanner" hidden>
+    <div class="db-l"><span class="db-dot" aria-hidden="true"></span><div><div class="db-eb">Departamento · Safra <span id="dbSafra"></span></div><h2 id="dbNome"></h2></div></div>
+    <div class="db-r" id="dbResumo"></div>
+    <button type="button" class="db-voltar" data-aba="safra">← Visão geral</button>
+  </section>
+
   <section aria-labelledby="tk">
     <h2 id="tk" class="sr" hidden>Indicadores</h2>
     <div class="kpis" id="kpis"></div>
   </section>
 
-  <section>
+  <section id="secDeps">
     <div class="sec-h"><h2>Departamentos</h2><span class="sub" id="dsub"></span></div>
     <div class="dcards" id="dcards"></div>
   </section>

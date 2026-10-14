@@ -51,19 +51,33 @@ const KPIS=[
 ];
 
 function render(){
-  const L=DADOS.filter(d=>d.safra===st.safra);
+  // Safra inteira (visão geral) ou só o departamento aberto no menu
+  const LS=DADOS.filter(d=>d.safra===st.safra);
+  const L=st.dept?LS.filter(d=>d.dept===st.dept):LS;
   document.getElementById("hoje").textContent=HOJE.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
   const S=safras(), sel=document.getElementById("safras");
   // Com uma safra só não há o que escolher: mostra só o rótulo; o seletor volta quando entrar a próxima safra
   sel.innerHTML=S.length>1?S.map(s=>`<button type="button" data-s="${s}" aria-pressed="${s===st.safra}">Safra ${s}</button>`).join(""):`<button type="button" aria-pressed="true" tabindex="-1" style="cursor:default">Safra ${st.safra}</button>`;
   document.querySelector(".lbl-mini").hidden=S.length<2;
-  faixa(L); kpis(L); depts(L); historico(); tabela(L);
+  faixa(L); kpis(L); depts(LS); historico(); tabela(L);
+  // Contador de atividades em aberto por departamento no menu
+  document.querySelectorAll("[data-cnt]").forEach(el=>{const n=LS.filter(d=>d.dept===el.dataset.cnt&&aberta(d)).length;el.textContent=n||""});
+  // Visão geral × departamento
+  document.getElementById("secDeps").hidden=!!st.dept;
+  const ban=document.getElementById("depBanner");ban.hidden=!st.dept;
+  if(st.dept){
+    const c=DEPTS[st.dept], tot=sum(LS,d=>d.prev)||0, p=sum(L,d=>d.prev), r=sum(L,d=>d.real);
+    ban.style.setProperty("--c",`var(${c})`);
+    document.getElementById("dbNome").textContent=st.dept;
+    document.getElementById("dbSafra").textContent=st.safra;
+    document.getElementById("dbResumo").innerHTML=`<span>Atividades<b>${L.length}</b></span><span>Previsto<b>${brl(p)}</b></span><span>Realizado<b>${brl(r)}</b></span><span>Fatia do orçamento<b>${tot?(p/tot*100).toFixed(0):0}%</b></span>`;
+  }
 }
 
 function faixa(L){
   const itens=L.filter(d=>ehPrio(d)&&aberta(d)).sort((a,b)=>(a.prioridade==="Crítica"?0:1)-(b.prioridade==="Crítica"?0:1)||(a.fim||"").localeCompare(b.fim||""));
   const fita=document.getElementById("fita");
-  if(!itens.length){fita.innerHTML=`<span class="item">Nenhuma atividade crítica ou alta em aberto na safra ${st.safra}.</span>`;fita.style.animation="none";return}
+  if(!itens.length){fita.innerHTML=`<span class="item">Nenhuma atividade crítica ou alta em aberto${st.dept?" em "+st.dept:""} na safra ${st.safra}.</span>`;fita.style.animation="none";return}
   const html=itens.map(d=>{const e=efetivo(d),n=diasAte(d.fim);
     const prazo=!d.fim?"sem prazo definido":e==="Atrasado"?`atrasada ${-n}d`:n<=30?`vence em ${n}d`:`até ${dt(d.fim)}`;
     return `<button type="button" class="item" data-foco="${d.id}"><span class="pri ${d.prioridade==="Alta"?"alta":""}">${esc(d.prioridade)}</span><b>${esc(d.nome)}</b><span class="dep">· ${esc(d.dept)} · ${esc(d.area)}</span><span class="prz">${prazo}</span></button>`}).join("");
@@ -76,7 +90,7 @@ function kpis(L){
   const prev=sum(L,d=>d.prev), real=sum(L,d=>d.real), fech=L.filter(d=>d.real!=null), prevF=sum(fech,d=>d.prev);
   const conc=L.filter(KPIS[1].f).length, tot=L.length||1;
   const info={
-    todas:[L.length,`${Object.keys(DEPTS).filter(n=>L.some(d=>d.dept===n)).length} departamentos envolvidos`,null],
+    todas:[L.length,st.dept?`de ${st.dept} na safra ${st.safra}`:`${Object.keys(DEPTS).filter(n=>L.some(d=>d.dept===n)).length} departamentos envolvidos`,null],
     concluidas:[conc,`${Math.round(conc/tot*100)}% da safra`,conc/tot],
     andamento:[L.filter(KPIS[2].f).length,"inclui aguardando material",null],
     atrasadas:[L.filter(KPIS[3].f).length,"prazo vencido sem conclusão",null],
@@ -171,7 +185,7 @@ function tabela(L){
     <td>${esc(d.compra)}</td>
     <td><div class="docs">${docs||'<span class="muted">—</span>'}</div></td>
     <td class="r num">${d.prev?brl(d.prev):"—"}</td><td class="r num">${brl(d.real)}</td></tr>`};
-  document.getElementById("grupos").innerHTML=Object.entries(DEPTS).map(([n,c])=>{
+  document.getElementById("grupos").innerHTML=Object.entries(DEPTS).filter(([n])=>!st.dept||n===st.dept).map(([n,c])=>{
     const D=L.filter(d=>d.dept===n), rows=todas.filter(d=>d.dept===n).sort(ord);
     const cc=D.filter(d=>d.status==="Concluído").length;
     return `<div class="grupo ${rows.length?"":"vazio-g"}" id="${gid(n)}" style="--c:var(${c})">
@@ -225,12 +239,21 @@ document.addEventListener("keydown",e=>{
   if(tr&&(e.key==="Enter"||e.key===" ")){e.preventDefault();abrir(tr.dataset.abre)}
 });
 document.addEventListener("click",e=>{const tr=e.target.closest("tr[data-abre]");if(tr)abrir(tr.dataset.abre)});
+const slug=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+// qual: "safra" (visão geral), "hist" (histórico) ou o nome de um departamento
 function aba(qual){
-  ["safra","hist"].forEach(a=>{document.getElementById("aba-"+a).hidden=a!==qual;document.getElementById("tab-"+a).setAttribute("aria-current",a===qual?"page":"false")});
-  document.getElementById("crumbAba").textContent=qual==="hist"?"Histórico":"Safra atual";
-  document.getElementById("pgTitulo").textContent=qual==="hist"?"Histórico entre safras":"Preparação da Safra de Tomate";
+  const dep=DEPTS[qual]?qual:null, painel=qual==="hist"?"hist":"safra";
+  st.dept=dep;st.kpi="todas";
+  ["safra","hist"].forEach(a=>document.getElementById("aba-"+a).hidden=a!==painel);
+  document.getElementById("tab-safra").setAttribute("aria-current",qual==="safra"?"page":"false");
+  document.getElementById("tab-hist").setAttribute("aria-current",qual==="hist"?"page":"false");
+  document.querySelectorAll("[data-nav]").forEach(b=>b.setAttribute("aria-current",b.dataset.nav===dep?"page":"false"));
+  document.getElementById("crumbAba").textContent=qual==="hist"?"Histórico":dep||"Visão geral";
+  document.getElementById("pgTitulo").textContent=qual==="hist"?"Histórico entre safras":dep?`Atividades de ${dep}`:"Preparação da Safra de Tomate";
   fecharMenu();
-  try{history.replaceState(null,"",qual==="hist"?"#historico":"#safra")}catch(e){}
+  if(st.safra)render();
+  window.scrollTo({top:0,behavior:"smooth"});
+  try{history.replaceState(null,"","#"+(qual==="hist"?"historico":dep?slug(dep):"geral"))}catch(e){}
 }
 function fecharMenu(){document.getElementById("side").classList.remove("open");document.querySelector(".scrim")?.remove()}
 document.getElementById("menuBtn").addEventListener("click",()=>{const s=document.getElementById("side");s.classList.add("open");const sc=document.createElement("div");sc.className="scrim";sc.onclick=fecharMenu;document.body.appendChild(sc)});
@@ -239,15 +262,14 @@ document.addEventListener("click",e=>{
   const lim=e.target.closest("[data-limpa]"); if(lim){st[lim.dataset.limpa]=lim.dataset.limpa==="kpi"?"todas":null;render();return}
   const b=e.target.closest("button"); if(!b) return;
   if(b.dataset.aba){aba(b.dataset.aba);return}
-  if(b.dataset.foco||b.dataset.kpi||b.dataset.d) aba("safra");
-  if(b.dataset.s){st.safra=b.dataset.s;st.dept=null;st.kpi="todas";render()}
+  if(b.dataset.d){aba(b.dataset.d);return}
+  if(b.dataset.s){st.safra=b.dataset.s;st.kpi="todas";render()}
   else if(b.dataset.kpi){st.kpi=b.dataset.kpi;render();irLista()}
-  else if(b.dataset.d){fecharMenu();const g=document.getElementById(gid(b.dataset.d));if(g)g.scrollIntoView({behavior:"smooth",block:"start"})}
-  else if(b.dataset.foco){st.kpi="todas";st.dept=null;st.foco=b.dataset.foco;render()}
+  else if(b.dataset.foco){if(!document.getElementById("aba-safra").hidden){st.kpi="todas"}else{aba("safra")}st.foco=b.dataset.foco;render()}
 });
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.limpa){e.preventDefault();e.target.click()}});
 
-function iniciar(){const s=safras(),ano=String(new Date().getFullYear()+1);st.safra=s.includes(ano)?ano:s[s.length-1];render();if(location.hash==="#historico")aba("hist")}
+function iniciar(){const s=safras(),ano=String(new Date().getFullYear()+1);st.safra=s.includes(ano)?ano:s[s.length-1];const h=location.hash.slice(1),dep=Object.keys(DEPTS).find(n=>slug(n)===h);aba(h==="historico"?"hist":dep||"safra")}
 /* ---------- Carregamento dos dados ----------
    A automação (GitHub Actions) lê o quadro do Monday e publica data/dados.json.
    Sem esse arquivo (antes da primeira execução), o painel mostra os exemplos. */
