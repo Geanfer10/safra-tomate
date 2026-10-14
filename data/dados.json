@@ -1,5 +1,5 @@
 {
- "gerado": "2026-10-14T19:29:47+00:00",
+ "gerado": "2026-10-14T19:46:35+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -164,7 +164,7 @@
    "ini": null,
    "fim": null,
    "prev": 0,
-   "real": 7500.0,
+   "real": null,
    "compra": "Sem compra",
    "fornecedor": "",
    "rc": "",
