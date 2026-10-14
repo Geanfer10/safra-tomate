@@ -21,6 +21,10 @@
   --side:#08100c; --side2:#0e1a13; --brand:#25a35a; --brand-soft:#173322; --tomato:#ef5a4a; --gold:#e0b44c;
   --mec:#3cbf73; --ele:#5b93f0; --aut:#f0a24a; --civ:#b48f6f;
   --ok:#3cbf73; --warn:#e5ad3a; --bad:#ef5a4a; --gray:#7d8c82; --shadow:none; color-scheme:dark}
+/* Base: elementos ocultos ficam ocultos; página sem margem externa */
+[hidden]{display:none!important}
+html,body{margin:0;padding:0}
+img{max-width:100%}
 *{box-sizing:border-box}
 html,body{height:100%}
 body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14px;line-height:1.45}
