@@ -1,0 +1,9 @@
+# Nunca versionar dados em texto aberto nem segredos
+dados.json
+*.plain.json
+.env
+*.env
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
