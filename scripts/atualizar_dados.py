@@ -2,41 +2,48 @@
 Atualiza o painel da Safra de Tomate a partir do Monday.
 
 Fluxo:
-  1. Lê o quadro "Safra de Tomate – Preparação e Investimentos" pela API do Monday
-     (token vem do secret MONDAY_API_TOKEN; nunca fica no código).
-  2. Converte para o formato que o painel usa.
-  3. Baixa as fotos do local, reduz para miniaturas e embute no pacote.
-     Orçamentos e NF-e NÃO são publicados: o painel só mostra o nome e um link
-     para o item no Monday, que exige login.
-  4. Criptografa tudo com AES-256-GCM (chave derivada da senha PAINEL_SENHA
-     por PBKDF2-SHA256) e grava data/dados.enc.json.
-  5. Se o conteúdo não mudou desde a última execução, mantém o arquivo como
-     está (evita commits desnecessários).
+  1. Lê o quadro "Safra de Tomate – Preparação e Investimentos" pela API do Monday.
+     O token vem do secret MONDAY_API_TOKEN e nunca é gravado nem impresso.
+  2. Converte os itens para o formato do painel.
+  3. Baixa os anexos (fotos do local, orçamentos e NF-e) para data/arquivos/,
+     porque os links de arquivo do Monday expiram em pouco tempo.
+  4. Grava data/dados.json. Se algo falhar, o arquivo anterior é mantido.
 
-Nenhum dado em texto aberto é gravado no repositório.
+Cuidados de segurança aplicados:
+  - Token só por variável de ambiente; mensagens de erro nunca incluem o token.
+  - Downloads apenas por HTTPS, com limite de tamanho e lista de extensões permitidas.
+  - Nomes de arquivo limpos (sem caminhos, sem caracteres especiais) para evitar
+    gravação fora da pasta de destino.
+  - Fotos regravadas como JPEG (remove metadados como localização GPS do celular).
+  - Gravação atômica: os dados novos só substituem os antigos se tudo der certo.
 """
-import base64
 import io
 import json
 import os
+import re
+import shutil
 import sys
+import tempfile
+import unicodedata
 import urllib.request
 from datetime import datetime, timezone
 
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from PIL import Image
 
 BOARD_ID = os.environ.get("MONDAY_BOARD_ID", "18435486131")
 CONTA = os.environ.get("MONDAY_CONTA", "messigean18s-team")
-SAIDA = os.path.join(os.path.dirname(__file__), "..", "data", "dados.enc.json")
-ITERACOES = 310_000
-MAX_FOTOS = 4
-LADO_FOTO = 800  # px no maior lado
+SAFRA_PADRAO = os.environ.get("SAFRA_PADRAO", "2027")  # quando a coluna Safra estiver vazia
+
+RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+PASTA_DADOS = os.path.join(RAIZ, "data")
+ARQ_JSON = os.path.join(PASTA_DADOS, "dados.json")
+PASTA_ARQ = os.path.join(PASTA_DADOS, "arquivos")
+
 DEPARTAMENTOS = {"Mecânica", "Elétrica", "Automação", "Civil"}
-# Safra usada quando a coluna "Safra" estiver vazia no Monday
-SAFRA_PADRAO = os.environ.get("SAFRA_PADRAO", "2027")
+LADO_FOTO = 1600                     # px no maior lado
+MAX_BYTES = 25 * 1024 * 1024         # 25 MB por arquivo
+EXT_FOTO = {"jpg", "jpeg", "png", "webp", "gif", "bmp"}
+EXT_DOC = {"pdf", "xml", "xlsx", "xls", "csv", "docx", "doc", "txt", "jpg", "jpeg", "png"}
 
 # IDs das colunas do quadro no Monday
 COL = {
@@ -62,16 +69,8 @@ COL = {
 
 
 def falha(msg):
-    # Mensagem sem dados sensíveis; o arquivo publicado anterior é mantido
     print(f"ERRO: {msg}", file=sys.stderr)
     sys.exit(1)
-
-
-def segredo(nome):
-    v = os.environ.get(nome, "")
-    if not v:
-        falha(f"secret {nome} não configurado")
-    return v
 
 
 def monday(query, variables, token):
@@ -80,8 +79,11 @@ def monday(query, variables, token):
         data=json.dumps({"query": query, "variables": variables}).encode(),
         headers={"Authorization": token, "Content-Type": "application/json", "API-Version": "2024-10"},
     )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        resp = json.loads(r.read())
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            resp = json.loads(r.read())
+    except Exception as e:  # não repassa detalhes que possam conter o cabeçalho
+        falha(f"não foi possível acessar a API do Monday ({type(e).__name__})")
     if resp.get("errors"):
         falha("a API do Monday retornou erro: " + "; ".join(e.get("message", "") for e in resp["errors"])[:300])
     return resp["data"]
@@ -96,15 +98,12 @@ CAMPOS_ITEM = """
 
 
 def ler_itens(token):
-    itens, cursor = [], None
-    d = monday(
-        "query($b:[ID!]){ boards(ids:$b){ items_page(limit:200){ cursor items {" + CAMPOS_ITEM + "} } } }",
-        {"b": [BOARD_ID]}, token)
+    d = monday("query($b:[ID!]){ boards(ids:$b){ items_page(limit:200){ cursor items {" + CAMPOS_ITEM + "} } } }",
+               {"b": [BOARD_ID]}, token)
     if not d["boards"]:
         falha("quadro não encontrado (verifique MONDAY_BOARD_ID e o acesso do token)")
     pagina = d["boards"][0]["items_page"]
-    itens += pagina["items"]
-    cursor = pagina["cursor"]
+    itens, cursor = list(pagina["items"]), pagina["cursor"]
     while cursor:
         d = monday("query($c:String!){ next_items_page(limit:200, cursor:$c){ cursor items {" + CAMPOS_ITEM + "} } }",
                    {"c": cursor}, token)
@@ -120,8 +119,31 @@ def numero(txt):
         return None
 
 
-def arquivos(cv, assets):
-    """Lista de arquivos de uma coluna de arquivo: [(nome, asset)]."""
+def nome_seguro(nome):
+    """Remove caminhos e caracteres especiais do nome do arquivo."""
+    nome = os.path.basename(str(nome or "arquivo"))
+    nome = unicodedata.normalize("NFKD", nome).encode("ascii", "ignore").decode()
+    nome = re.sub(r"[^A-Za-z0-9._-]+", "-", nome).strip(".-") or "arquivo"
+    return nome[:80]
+
+
+def extensao(nome, asset):
+    ext = (asset or {}).get("file_extension") or os.path.splitext(nome)[1]
+    return str(ext).lower().lstrip(".")
+
+
+def baixar(url):
+    if not str(url).startswith("https://"):
+        return None
+    try:
+        with urllib.request.urlopen(url, timeout=90) as r:
+            dados = r.read(MAX_BYTES + 1)
+        return None if len(dados) > MAX_BYTES else dados
+    except Exception:
+        return None  # anexo que não baixa é ignorado, sem derrubar a atualização
+
+
+def arquivos_coluna(cv, assets):
     if not cv or not cv.get("value"):
         return []
     try:
@@ -132,22 +154,41 @@ def arquivos(cv, assets):
     return [(f.get("name") or "arquivo", por_id.get(str(f.get("assetId")))) for f in files]
 
 
-def miniatura(url):
-    if not str(url).startswith("https://"):
-        return None  # só baixa de endereços HTTPS
-    try:
-        with urllib.request.urlopen(url, timeout=60) as r:
-            img = Image.open(io.BytesIO(r.read()))
-            img = img.convert("RGB")
-            img.thumbnail((LADO_FOTO, LADO_FOTO))
-            buf = io.BytesIO()
-            img.save(buf, "JPEG", quality=72, optimize=True)
-            return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
-    except Exception:
-        return None  # foto que não abre é ignorada, sem derrubar a atualização
+def salvar_anexos(cv, item, destino, tipo, usados):
+    """Baixa os anexos de uma coluna. tipo = 'foto' ou 'doc'."""
+    saida = []
+    for nome, asset in arquivos_coluna(cv, item.get("assets", [])):
+        if not asset or not asset.get("public_url"):
+            continue
+        ext = extensao(nome, asset)
+        if ext not in (EXT_FOTO if tipo == "foto" else EXT_DOC):
+            continue
+        conteudo = baixar(asset["public_url"])
+        if not conteudo:
+            continue
+        base = nome_seguro(os.path.splitext(nome)[0])
+        if tipo == "foto":
+            try:
+                img = Image.open(io.BytesIO(conteudo)).convert("RGB")  # descarta metadados (EXIF/GPS)
+                img.thumbnail((LADO_FOTO, LADO_FOTO))
+                buf = io.BytesIO()
+                img.save(buf, "JPEG", quality=80, optimize=True)
+                conteudo, ext = buf.getvalue(), "jpg"
+            except Exception:
+                continue
+        arq = f"{nome_seguro(str(asset['id']))}-{base}.{ext}"
+        if arq in usados:
+            continue
+        usados.add(arq)
+        pasta = os.path.join(destino, nome_seguro(str(item["id"])))
+        os.makedirs(pasta, exist_ok=True)
+        with open(os.path.join(pasta, arq), "wb") as f:
+            f.write(conteudo)
+        saida.append({"nome": nome, "url": f"data/arquivos/{nome_seguro(str(item['id']))}/{arq}"})
+    return saida
 
 
-def converter(item):
+def converter(item, destino):
     dept = (item.get("group") or {}).get("title", "").strip()
     if dept not in DEPARTAMENTOS:
         return None
@@ -162,15 +203,8 @@ def converter(item):
             ini, fim = v.get("from"), v.get("to")
         except ValueError:
             pass
-    fotos = []
-    for nome, asset in arquivos(cv.get(COL["fotos"]), item.get("assets", []))[:MAX_FOTOS]:
-        if asset and asset.get("public_url"):
-            img = miniatura(asset["public_url"])
-            if img:
-                fotos.append({"nome": nome, "url": img})
-    # Orçamentos e NF-e: só o nome + link para o item no Monday (exige login)
-    orcs = [{"nome": n, "url": url} for n, _ in arquivos(cv.get(COL["orcamentos"]), item.get("assets", []))]
-    nfe_arqs = arquivos(cv.get(COL["nfe_arq"]), item.get("assets", []))
+    usados = set()
+    nfes = salvar_anexos(cv.get(COL["nfe_arq"]), item, destino, "doc", usados)
     return {
         "id": item["id"],
         "nome": item["name"],
@@ -190,52 +224,52 @@ def converter(item):
         "rc": t("rc"),
         "os": t("os"),
         "nfe": t("nfe"),
-        "nfeArq": {"nome": nfe_arqs[0][0], "url": url} if nfe_arqs else None,
-        "fotos": fotos,
-        "orcamentos": orcs,
+        "nfeArq": nfes[0] if nfes else None,
+        "fotos": salvar_anexos(cv.get(COL["fotos"]), item, destino, "foto", usados),
+        "orcamentos": salvar_anexos(cv.get(COL["orcamentos"]), item, destino, "doc", usados),
         "obs": t("obs"),
         "url": url,
     }
 
 
-def chave(senha, salt):
-    return PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=ITERACOES).derive(senha.encode())
-
-
-def decifrar(pkg, senha):
-    k = chave(senha, base64.b64decode(pkg["salt"]))
-    return AESGCM(k).decrypt(base64.b64decode(pkg["iv"]), base64.b64decode(pkg["ct"]), None)
-
-
 def main():
-    token = segredo("MONDAY_API_TOKEN")
-    senha = segredo("PAINEL_SENHA")
-    if len(senha) < 12:
-        falha("PAINEL_SENHA precisa ter pelo menos 12 caracteres")
+    token = os.environ.get("MONDAY_API_TOKEN", "")
+    if not token:
+        falha("secret MONDAY_API_TOKEN não configurado")
 
-    itens = [x for x in (converter(i) for i in ler_itens(token)) if x]
-    corpo = json.dumps(itens, ensure_ascii=False, sort_keys=True)
+    brutos = ler_itens(token)
+    tmp = tempfile.mkdtemp(prefix="arquivos-")
+    try:
+        itens = [x for x in (converter(i, tmp) for i in brutos) if x]
+        # Ordem estável para o Git só registrar mudanças reais
+        itens.sort(key=lambda x: (x["dept"], x["nome"], x["id"]))
+        os.makedirs(PASTA_DADOS, exist_ok=True)
 
-    # Mantém o arquivo atual se nada mudou
-    if os.path.exists(SAIDA):
-        try:
-            with open(SAIDA, encoding="utf-8") as f:
-                antigo = json.loads(decifrar(json.load(f), senha))
-            if json.dumps(antigo.get("itens"), ensure_ascii=False, sort_keys=True) == corpo:
-                print(f"Sem mudanças ({len(itens)} atividades).")
-                return
-        except Exception:
-            pass  # senha trocada ou arquivo antigo inválido: gera de novo
+        anterior = None
+        if os.path.exists(ARQ_JSON):
+            try:
+                with open(ARQ_JSON, encoding="utf-8") as f:
+                    anterior = json.load(f)
+            except ValueError:
+                pass
+        gerado = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        if anterior and anterior.get("itens") == itens:
+            gerado = anterior.get("gerado", gerado)  # nada mudou: mantém a data
 
-    pacote = {"gerado": datetime.now(timezone.utc).isoformat(timespec="seconds"), "itens": itens}
-    salt, iv = os.urandom(16), os.urandom(12)
-    ct = AESGCM(chave(senha, salt)).encrypt(iv, json.dumps(pacote, ensure_ascii=False).encode(), None)
-    os.makedirs(os.path.dirname(SAIDA), exist_ok=True)
-    with open(SAIDA, "w", encoding="utf-8") as f:
-        json.dump({"v": 1, "alg": "AES-256-GCM/PBKDF2-SHA256", "iter": ITERACOES,
-                   "salt": base64.b64encode(salt).decode(), "iv": base64.b64encode(iv).decode(),
-                   "ct": base64.b64encode(ct).decode()}, f)
-    print(f"Atualizado: {len(itens)} atividades, {sum(len(i['fotos']) for i in itens)} fotos.")
+        # Troca a pasta de anexos e o JSON só depois de tudo pronto
+        if os.path.exists(PASTA_ARQ):
+            shutil.rmtree(PASTA_ARQ)
+        shutil.move(tmp, PASTA_ARQ)
+        tmp_json = ARQ_JSON + ".tmp"
+        with open(tmp_json, "w", encoding="utf-8") as f:
+            json.dump({"gerado": gerado, "itens": itens}, f, ensure_ascii=False, indent=1)
+        os.replace(tmp_json, ARQ_JSON)
+    finally:
+        if os.path.exists(tmp):
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    print(f"OK: {len(itens)} atividades, {sum(len(i['fotos']) for i in itens)} fotos, "
+          f"{sum(len(i['orcamentos']) for i in itens)} orçamentos.")
 
 
 if __name__ == "__main__":

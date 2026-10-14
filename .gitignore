@@ -1,6 +1,4 @@
-# Nunca versionar dados em texto aberto nem segredos
-dados.json
-*.plain.json
+# Nunca versionar segredos
 .env
 *.env
 __pycache__/

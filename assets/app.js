@@ -5,8 +5,7 @@ const ico={
 };
 const DEPTS={"Mecânica":"--mec","Elétrica":"--ele","Automação":"--aut","Civil":"--civ"};
 const STATUS_COR={"Não iniciado":"--gray","Em andamento":"--warn","Aguardando material":"--aut","Atrasado":"--bad","Concluído":"--ok","Cancelado":"--gray"};
-// Dados de EXEMPLO: usados só quando não existe data/dados.enc.json (pré-visualização local).
-// Os dados reais nunca ficam no repositório em texto aberto: chegam criptografados pela automação.
+// Dados de EXEMPLO: usados só quando ainda não existe data/dados.json (pré-visualização local).
 const EXEMPLO_BASE=[
  {id:1,nome:"Revisão geral das bombas de polpa",dept:"Mecânica",safra:"2027",status:"Não iniciado",prioridade:"Crítica",tipo:"Serviço interno",area:"Linha de extração",ini:"2027-02-01",fim:"2027-03-15",prev:18000,real:null,compra:"Sem compra"},
  {id:2,nome:"Troca de rolamentos e selos do triturador",dept:"Mecânica",safra:"2027",status:"Não iniciado",prioridade:"Alta",tipo:"Aquisição",area:"Recepção / triturador",ini:"2027-01-15",fim:"2027-02-28",prev:32000,real:null,compra:"Em cotação"},,
@@ -212,7 +211,7 @@ function abrir(id){
     <div class="gv-sec"><h3>${ico.clip} Orçamentos</h3>${orc.length?`<ul class="arqs">${orc.map(arq).join("")}</ul>`:`<div class="sem-arq">Nenhum orçamento anexado.</div>`}</div>
     <div class="gv-sec"><h3>${ico.doc} NF-e</h3>${d.nfeArq?`<ul class="arqs">${arq(d.nfeArq)}</ul>`:`<div class="sem-arq">${d.nfe?"Número informado, arquivo não anexado.":"Sem nota fiscal vinculada."}</div>`}</div>
     ${d.obs?`<div class="gv-sec"><h3>Observações / lições aprendidas</h3><p style="margin:0">${esc(d.obs)}</p></div>`:""}
-    ${d.url?`<a class="lock-btn" style="text-align:center;text-decoration:none" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Abrir no Monday</a>`:""}`;
+    ${d.url?`<a class="btn-monday" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Abrir no Monday</a>`:""}`;
   ultimoFoco=document.activeElement;
   document.getElementById("fundo").hidden=false; g.hidden=false;
   document.getElementById("gv-fechar").focus();
@@ -249,66 +248,26 @@ document.addEventListener("click",e=>{
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.limpa){e.preventDefault();e.target.click()}});
 
 function iniciar(){const s=safras(),ano=String(new Date().getFullYear()+1);st.safra=s.includes(ano)?ano:s[s.length-1];render();if(location.hash==="#historico")aba("hist")}
-/* ---------- Acesso aos dados criptografados ----------
-   A automação (GitHub Actions) busca o Monday, criptografa com AES-256-GCM
-   (chave derivada da senha por PBKDF2-SHA256) e publica data/dados.enc.json.
-   A senha nunca vai para o repositório: é digitada aqui e a decifragem acontece
-   só no navegador. */
-const ARQ_DADOS="data/dados.enc.json", CHAVE_SENHA="safraTomate.acesso";
-let PKG=null;
-const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-async function decifrar(pkg,senha){
-  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(senha),"PBKDF2",false,["deriveKey"]);
-  const chave=await crypto.subtle.deriveKey({name:"PBKDF2",hash:"SHA-256",salt:b64(pkg.salt),iterations:pkg.iter},base,{name:"AES-GCM",length:256},false,["decrypt"]);
-  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64(pkg.iv)},chave,b64(pkg.ct));
-  return JSON.parse(new TextDecoder().decode(pt));
-}
-const guardada=()=>{try{return sessionStorage.getItem(CHAVE_SENHA)||localStorage.getItem(CHAVE_SENHA)}catch(e){return null}};
-function guardar(senha,lembrar){try{sessionStorage.setItem(CHAVE_SENHA,senha);if(lembrar)localStorage.setItem(CHAVE_SENHA,senha)}catch(e){}}
-function esquecer(){try{sessionStorage.removeItem(CHAVE_SENHA);localStorage.removeItem(CHAVE_SENHA)}catch(e){}}
-async function tentar(senha){
-  try{
-    const dados=await decifrar(PKG,senha);
-    DADOS=Array.isArray(dados.itens)?dados.itens:[];
-    const quando=dados.gerado?new Date(dados.gerado).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}):"";
-    document.getElementById("fonteSub").textContent="Atualizado em "+quando;
-    document.getElementById("rodapeFonte").textContent=`Fonte: quadro “Safra de Tomate – Preparação e Investimentos” (Monday) · atualizado em ${quando}.`;
-    document.getElementById("btnBloquear").hidden=false;
-    document.getElementById("lock").hidden=true;
-    iniciar();return true;
-  }catch(e){return false}
-}
-function mostrarAcesso(msg){
-  const l=document.getElementById("lock");l.hidden=false;
-  document.getElementById("lockErr").textContent=msg||"";
-  setTimeout(()=>document.getElementById("senha").focus(),30);
-}
-document.getElementById("lockForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const s=document.getElementById("senha"),btn=document.getElementById("lockBtn");
-  if(!PKG){mostrarAcesso("Os dados ainda não foram carregados. Recarregue a página.");return}
-  btn.disabled=true;btn.textContent="Verificando…";
-  const ok=await tentar(s.value);
-  btn.disabled=false;btn.textContent="Entrar";
-  if(ok){guardar(s.value,document.getElementById("lembrar").checked);s.value=""}
-  else{s.select();mostrarAcesso("Senha incorreta. Confira com o PCM.")}
-});
-document.getElementById("btnBloquear").addEventListener("click",()=>{esquecer();location.reload()});
+/* ---------- Carregamento dos dados ----------
+   A automação (GitHub Actions) lê o quadro do Monday e publica data/dados.json.
+   Sem esse arquivo (antes da primeira execução), o painel mostra os exemplos. */
+const ARQ_DADOS="data/dados.json";
 async function carregar(){
   let r=null;
   try{r=await fetch(ARQ_DADOS,{cache:"no-store"})}catch(e){}
-  if(r&&r.status===404){
-    // Sem dados publicados ainda: pré-visualização com exemplos
-    DADOS=EXEMPLO;
-    document.getElementById("fonteSub").textContent="Dados de exemplo (automação ainda não rodou)";
-    document.getElementById("rodapeFonte").textContent="Exibindo dados de EXEMPLO. Os dados reais aparecem depois da primeira execução da automação.";
-    iniciar();return;
+  if(r&&r.ok){
+    try{
+      const dados=await r.json();
+      DADOS=Array.isArray(dados.itens)?dados.itens:[];
+      const quando=dados.gerado?new Date(dados.gerado).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}):"";
+      document.getElementById("fonteSub").textContent="Atualizado em "+quando;
+      document.getElementById("rodapeFonte").textContent=`Fonte: quadro “Safra de Tomate – Preparação e Investimentos” (Monday) · atualizado em ${quando}.`;
+      iniciar();return;
+    }catch(e){}
   }
-  if(!r||!r.ok){mostrarAcesso("Não foi possível carregar os dados. Verifique a conexão e recarregue.");return}
-  try{PKG=await r.json()}catch(e){mostrarAcesso("Arquivo de dados inválido. Avise o PCM.");return}
-  const s=guardada();
-  if(s&&await tentar(s))return;
-  if(s)esquecer();
-  mostrarAcesso();
+  DADOS=EXEMPLO;
+  document.getElementById("fonteSub").textContent="Dados de exemplo (automação ainda não rodou)";
+  document.getElementById("rodapeFonte").textContent="Exibindo dados de EXEMPLO. Os dados reais aparecem depois da primeira execução da automação.";
+  iniciar();
 }
 carregar();
