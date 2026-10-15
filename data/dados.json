@@ -1,5 +1,5 @@
 {
- "gerado": "2026-10-14T23:05:42+00:00",
+ "gerado": "2026-10-15T14:04:25+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -175,6 +175,31 @@
    "orcamentos": [],
    "obs": "",
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291534308"
+  },
+  {
+   "id": "13298321191",
+   "nome": "Analise de vibração",
+   "dept": "Mecânica",
+   "safra": "2027",
+   "status": "Não iniciado",
+   "prioridade": "Alta",
+   "tipo": "Serviço terceirizado",
+   "resp": "",
+   "area": "Linha de polpa/Caldeira",
+   "ini": null,
+   "fim": null,
+   "prev": 0,
+   "real": null,
+   "compra": "Sem compra",
+   "fornecedor": "",
+   "rc": "",
+   "os": "",
+   "nfe": "",
+   "nfeArq": null,
+   "fotos": [],
+   "orcamentos": [],
+   "obs": "",
+   "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13298321191"
   },
   {
    "id": "13291515052",
