@@ -27,7 +27,7 @@ const EXTRAS={
 const EXEMPLO=EXEMPLO_BASE.map(d=>Object.assign({},d,EXTRAS[d.id]||{}));
 let DADOS=[];
 const HOJE=new Date(); HOJE.setHours(0,0,0,0);
-const st={safra:null,kpi:"todas",dept:null,foco:null};
+const st={safra:null,kpi:"todas",dept:null,foco:null,tipo:""};
 const brl=v=>v==null?"—":v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
 const mil=v=>v>=1e6?"R$ "+(v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mi":v>=1000?"R$ "+(v/1000).toLocaleString("pt-BR",{maximumFractionDigits:0})+" mil":brl(v);
 const dt=s=>s?s.slice(8,10)+"/"+s.slice(5,7)+"/"+s.slice(2,4):"—";
@@ -52,8 +52,11 @@ const KPIS=[
 
 function render(){
   // Safra inteira (visão geral) ou só o departamento aberto no menu
-  const LS=DADOS.filter(d=>d.safra===st.safra);
+  // Categoria (tipo de serviço) vale para tudo: KPIs, faixa, departamentos e atividades
+  const LS0=DADOS.filter(d=>d.safra===st.safra);
+  const LS=st.tipo?LS0.filter(d=>d.tipo===st.tipo):LS0;
   const L=st.dept?LS.filter(d=>d.dept===st.dept):LS;
+  categorias(st.dept?LS0.filter(d=>d.dept===st.dept):LS0);
   document.getElementById("hoje").textContent=HOJE.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
   const S=safras(), sel=document.getElementById("safras");
   // Com uma safra só não há o que escolher: mostra só o rótulo; o seletor volta quando entrar a próxima safra
@@ -74,6 +77,16 @@ function render(){
   }
 }
 
+const TIPO_COR={"Serviço interno":"--brand","Aquisição":"--ele","Serviço terceirizado":"--aut"};
+function categorias(B){
+  const tipos=[...new Set([...Object.keys(TIPO_COR),...B.map(d=>d.tipo).filter(Boolean)])];
+  const card=(id,nome,lst,cor)=>`<button type="button" class="cat" data-tipo="${esc(id)}" aria-pressed="${st.tipo===id}" style="--k:var(${cor})">
+    <span class="cat-n">${esc(nome)}</span><span class="cat-v num">${lst.length}</span>
+    <span class="cat-d">${lst.filter(aberta).length} em aberto · ${mil(sum(lst,d=>d.prev))}</span></button>`;
+  document.getElementById("cats").innerHTML=card("","Todas",B,"--fg")+tipos.map(t=>card(t,t,B.filter(d=>d.tipo===t),TIPO_COR[t]||"--gray")).join("");
+  document.getElementById("fTipo").innerHTML=`<option value="">Todas as categorias (${B.length})</option>`+tipos.map(t=>`<option value="${esc(t)}"${st.tipo===t?" selected":""}>${esc(t)} (${B.filter(d=>d.tipo===t).length})</option>`).join("");
+}
+document.getElementById("fTipo").addEventListener("change",e=>{st.tipo=e.target.value;render()});
 function faixa(L){
   const itens=L.filter(d=>ehPrio(d)&&aberta(d)).sort((a,b)=>(a.prioridade==="Crítica"?0:1)-(b.prioridade==="Crítica"?0:1)||(a.fim||"").localeCompare(b.fim||""));
   const fita=document.getElementById("fita");
@@ -172,6 +185,7 @@ function tabela(L){
   document.getElementById("ttab").textContent=(st.kpi==="todas"?"Atividades":K.l)+` · ${todas.length}`;
   document.getElementById("filtros").innerHTML=
     `<span class="chip on">${K.l}${st.kpi!=="todas"?` <span data-limpa="kpi" role="button" tabindex="0" aria-label="Remover filtro ${K.l}">✕</span>`:""}</span>`+
+    (st.tipo?`<span class="chip on">${esc(st.tipo)} <span data-limpa="tipo" role="button" tabindex="0" aria-label="Remover filtro ${esc(st.tipo)}">✕</span></span>`:"")+
     `<span class="sub">Safra ${st.safra}</span>`;
   const linha=d=>{const e=efetivo(d);const pc=d.prioridade==="Crítica"?"crit":d.prioridade==="Alta"?"alta":"";
     const docs=[d.os?`<span class="doc">OS ${esc(d.os.replace(/^OS-?/,""))}</span>`:"",d.nfe?`<span class="doc nf">${esc(d.nfe)}</span>`:"",
@@ -278,7 +292,8 @@ function fecharMenu(){document.getElementById("side").classList.remove("open");d
 document.getElementById("menuBtn").addEventListener("click",()=>{const s=document.getElementById("side");s.classList.add("open");const sc=document.createElement("div");sc.className="scrim";sc.onclick=fecharMenu;document.body.appendChild(sc)});
 function irLista(){document.getElementById("atividades").scrollIntoView({behavior:"smooth",block:"start"})}
 document.addEventListener("click",e=>{
-  const lim=e.target.closest("[data-limpa]"); if(lim){st[lim.dataset.limpa]=lim.dataset.limpa==="kpi"?"todas":null;render();return}
+  const lim=e.target.closest("[data-limpa]"); if(lim){const k=lim.dataset.limpa;st[k]=k==="kpi"?"todas":k==="tipo"?"":null;render();return}
+  const ct=e.target.closest("[data-tipo]"); if(ct){st.tipo=st.tipo===ct.dataset.tipo?"":ct.dataset.tipo;render();return}
   const b=e.target.closest("button"); if(!b) return;
   if(b.dataset.aba){aba(b.dataset.aba);return}
   if(b.dataset.d){aba(b.dataset.d);return}
