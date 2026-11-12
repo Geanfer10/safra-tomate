@@ -258,3 +258,15 @@ details.lst li .o{grid-column:1/-1;color:var(--muted);font-size:11.5px}
 .db-voltar{border:1px solid var(--line);background:var(--surface2);border-radius:6px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
 .db-voltar:hover{border-color:var(--c)}
 .nav .cnt:empty{display:none}
+
+/* Foto ampliada */
+.foto-btn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;border-radius:6px}
+.foto-btn:hover img{outline:2px solid var(--brand);outline-offset:1px}
+.foto-zoom{position:fixed;inset:0;z-index:60;background:rgba(4,10,7,.9);display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.foto-zoom figure{margin:0;grid-column:2;display:grid;justify-items:center;gap:10px;min-width:0}
+.foto-zoom img{max-width:100%;max-height:calc(100vh - 110px);object-fit:contain;border-radius:6px;box-shadow:0 20px 50px rgba(0,0,0,.5);background:#111}
+.foto-zoom figcaption{color:#dfe9e3;font-size:13px;text-align:center}
+.fz-fechar{position:absolute;top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:18px;cursor:pointer}
+.fz-nav{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:28px;line-height:1;cursor:pointer}
+.fz-nav:hover,.fz-fechar:hover{background:rgba(255,255,255,.26)}
+.fz-ant{grid-column:1}.fz-prox{grid-column:3}

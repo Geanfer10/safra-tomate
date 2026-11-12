@@ -221,19 +221,38 @@ function abrir(id){
       ${campo("Previsto",d.prev?brl(d.prev):"",1)}
       ${campo("Realizado",d.real!=null?brl(d.real):"",1)}
     </div>
-    <div class="gv-sec"><h3>${ico.foto} Fotos do local</h3>${fotos.length?`<div class="fotos">${fotos.map(f=>`<figure><img src="${esc(f.url)}" alt="${esc(f.nome)}" loading="lazy"><figcaption>${esc(f.nome)}</figcaption></figure>`).join("")}</div>`:`<div class="sem-arq">Nenhuma foto anexada no Monday.</div>`}</div>
+    <div class="gv-sec"><h3>${ico.foto} Fotos do local</h3>${fotos.length?`<div class="fotos">${fotos.map((f,i)=>`<figure><button type="button" class="foto-btn" data-zoom="${i}" aria-label="Ampliar foto ${esc(f.nome)}"><img src="${esc(f.url)}" alt="${esc(f.nome)}" loading="lazy"></button><figcaption>${esc(f.nome)}</figcaption></figure>`).join("")}</div>`:`<div class="sem-arq">Nenhuma foto anexada no Monday.</div>`}</div>
     <div class="gv-sec"><h3>${ico.clip} Orçamentos</h3>${orc.length?`<ul class="arqs">${orc.map(arq).join("")}</ul>`:`<div class="sem-arq">Nenhum orçamento anexado.</div>`}</div>
     <div class="gv-sec"><h3>${ico.doc} NF-e</h3>${d.nfeArq?`<ul class="arqs">${arq(d.nfeArq)}</ul>`:`<div class="sem-arq">${d.nfe?"Número informado, arquivo não anexado.":"Sem nota fiscal vinculada."}</div>`}</div>
     ${d.obs?`<div class="gv-sec"><h3>Observações / lições aprendidas</h3><p style="margin:0">${esc(d.obs)}</p></div>`:""}
     ${d.url?`<a class="btn-monday" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Abrir no Monday</a>`:""}`;
+  fotosAbertas=fotos;
   ultimoFoco=document.activeElement;
   document.getElementById("fundo").hidden=false; g.hidden=false;
   document.getElementById("gv-fechar").focus();
 }
+/* ---------- Foto ampliada ---------- */
+let fotosAbertas=[],fotoAtual=0;
+function mostrarFoto(i){
+  const n=fotosAbertas.length;if(!n)return;
+  fotoAtual=(i+n)%n;const f=fotosAbertas[fotoAtual];
+  const img=document.getElementById("fzImg");img.src=f.url;img.alt=f.nome||"Foto do local";
+  document.getElementById("fzLeg").textContent=(f.nome||"")+(n>1?`  ·  ${fotoAtual+1} de ${n}`:"");
+  document.getElementById("fzAnt").hidden=document.getElementById("fzProx").hidden=n<2;
+  const z=document.getElementById("fotoZoom");z.hidden=false;document.getElementById("fzFechar").focus();
+}
+function fecharFoto(){document.getElementById("fotoZoom").hidden=true;const b=document.querySelector(`[data-zoom="${fotoAtual}"]`);if(b)b.focus()}
+document.getElementById("fzFechar").addEventListener("click",fecharFoto);
+document.getElementById("fzAnt").addEventListener("click",()=>mostrarFoto(fotoAtual-1));
+document.getElementById("fzProx").addEventListener("click",()=>mostrarFoto(fotoAtual+1));
+document.getElementById("fotoZoom").addEventListener("click",e=>{if(e.target.id==="fotoZoom"||e.target.tagName==="FIGURE")fecharFoto()});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-zoom]");if(b)mostrarFoto(+b.dataset.zoom)});
 function fechar(){document.getElementById("fundo").hidden=true;document.getElementById("gaveta").hidden=true;if(ultimoFoco&&ultimoFoco.focus)ultimoFoco.focus()}
 document.getElementById("gv-fechar").addEventListener("click",fechar);
 document.getElementById("fundo").addEventListener("click",fechar);
 document.addEventListener("keydown",e=>{
+  const z=document.getElementById("fotoZoom");
+  if(!z.hidden){if(e.key==="Escape")fecharFoto();else if(e.key==="ArrowLeft")mostrarFoto(fotoAtual-1);else if(e.key==="ArrowRight")mostrarFoto(fotoAtual+1);return}
   if(e.key==="Escape"&&!document.getElementById("gaveta").hidden)fechar();
   const tr=e.target.closest&&e.target.closest("tr[data-abre]");
   if(tr&&(e.key==="Enter"||e.key===" ")){e.preventDefault();abrir(tr.dataset.abre)}

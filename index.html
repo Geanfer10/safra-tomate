@@ -105,6 +105,12 @@
 </div>
 
 <div class="fundo" id="fundo" hidden></div>
+<div class="foto-zoom" id="fotoZoom" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+  <button type="button" class="fz-fechar" id="fzFechar" aria-label="Fechar foto">✕</button>
+  <button type="button" class="fz-nav fz-ant" id="fzAnt" aria-label="Foto anterior">‹</button>
+  <figure><img id="fzImg" alt=""><figcaption id="fzLeg"></figcaption></figure>
+  <button type="button" class="fz-nav fz-prox" id="fzProx" aria-label="Próxima foto">›</button>
+</div>
 <aside class="gaveta" id="gaveta" role="dialog" aria-modal="true" aria-labelledby="gv-tit" hidden>
   <div class="gv-top"><div><div class="eyebrow" id="gv-dep"></div><h2 id="gv-tit"></h2></div><button type="button" class="fechar" id="gv-fechar" aria-label="Fechar detalhes">✕</button></div>
   <div class="gv-corpo" id="gv-corpo"></div>
