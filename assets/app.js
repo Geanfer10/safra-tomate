@@ -40,15 +40,16 @@ const diasAte=s=>Math.round((new Date(s+"T00:00")-HOJE)/864e5);
 const safras=()=>[...new Set(DADOS.map(d=>d.safra))].sort();
 
 // Indicadores clicáveis: cada um filtra a lista de atividades
+// "todas" fica fora dos cartões: é o estado padrão (sem filtro) da lista de atividades
+const KPI_TODAS={id:"todas",l:"Atividades",k:"--brand",f:()=>true};
 const KPIS=[
- {id:"todas",l:"Atividades",k:"--brand",f:()=>true},
- {id:"concluidas",l:"Concluídas",k:"--ok",f:d=>d.status==="Concluído"},
- {id:"andamento",l:"Em andamento",k:"--warn",f:d=>d.status==="Em andamento"||d.status==="Aguardando material"},
  {id:"atrasadas",l:"Atrasadas",k:"--bad",f:d=>efetivo(d)==="Atrasado"},
  {id:"prioridade",l:"Prioridade alta",k:"--tomato",f:d=>ehPrio(d)&&aberta(d)},
- {id:"aquisicoes",l:"Aquisições",k:"--ele",f:d=>d.tipo==="Aquisição"},
+ {id:"andamento",l:"Em andamento",k:"--warn",f:d=>d.status==="Em andamento"||d.status==="Aguardando material"},
+ {id:"concluidas",l:"Concluídas",k:"--ok",f:d=>d.status==="Concluído"},
  {id:"orcamento",l:"Orçamento",k:"--gold",f:d=>(d.prev||0)>0}
 ];
+const kpiDe=id=>KPIS.find(k=>k.id===id)||KPI_TODAS;
 
 function render(){
   // Safra inteira (visão geral) ou só o departamento aberto no menu
@@ -101,14 +102,13 @@ function faixa(L){
 
 function kpis(L){
   const prev=sum(L,d=>d.prev), real=sum(L,d=>d.real), fech=L.filter(d=>d.real!=null), prevF=sum(fech,d=>d.prev);
-  const conc=L.filter(KPIS[1].f).length, tot=L.length||1;
+  const conc=L.filter(kpiDe("concluidas").f).length, tot=L.length||1;
   const info={
     todas:[L.length,st.dept?`de ${st.dept} na safra ${st.safra}`:`${Object.keys(DEPTS).filter(n=>L.some(d=>d.dept===n)).length} departamentos envolvidos`,null],
     concluidas:[conc,`${Math.round(conc/tot*100)}% da safra`,conc/tot],
-    andamento:[L.filter(KPIS[2].f).length,"inclui aguardando material",null],
-    atrasadas:[L.filter(KPIS[3].f).length,"prazo vencido sem conclusão",null],
-    prioridade:[L.filter(KPIS[4].f).length,`${L.filter(d=>d.prioridade==="Crítica"&&aberta(d)).length} críticas em aberto`,null],
-    aquisicoes:[L.filter(KPIS[5].f).length,mil(sum(L.filter(KPIS[5].f),d=>d.prev))+" previstos",null],
+    andamento:[L.filter(kpiDe("andamento").f).length,"inclui aguardando material",null],
+    atrasadas:[L.filter(kpiDe("atrasadas").f).length,"prazo vencido sem conclusão",null],
+    prioridade:[L.filter(kpiDe("prioridade").f).length,`${L.filter(d=>d.prioridade==="Crítica"&&aberta(d)).length} críticas em aberto`,null],
     orcamento:[mil(prev),fech.length?`realizado ${mil(real)} · ${prevF?((real/prevF)*100).toFixed(0):0}% do previsto fechado`:"nenhum item fechado ainda",prev?Math.min(1,real/prev):0]
   };
   document.getElementById("kpis").innerHTML=KPIS.map(k=>{const [v,d,bar]=info[k.id];
@@ -178,7 +178,7 @@ function linhasHist(V,comLista){
 }
 
 function tabela(L){
-  const K=KPIS.find(k=>k.id===st.kpi);
+  const K=kpiDe(st.kpi);
   const todas=L.filter(K.f);
   const ordP={"Crítica":0,"Alta":1,"Média":2,"Baixa":3};
   const ord=(a,b)=>(aberta(a)?0:1)-(aberta(b)?0:1)||(ordP[a.prioridade]??9)-(ordP[b.prioridade]??9)||(a.fim||"").localeCompare(b.fim||"");
@@ -298,7 +298,7 @@ document.addEventListener("click",e=>{
   if(b.dataset.aba){aba(b.dataset.aba);return}
   if(b.dataset.d){aba(b.dataset.d);return}
   if(b.dataset.s){st.safra=b.dataset.s;st.kpi="todas";render()}
-  else if(b.dataset.kpi){st.kpi=b.dataset.kpi;render();irLista()}
+  else if(b.dataset.kpi){st.kpi=st.kpi===b.dataset.kpi?"todas":b.dataset.kpi;render();if(st.kpi!=="todas")irLista()}
   else if(b.dataset.foco){if(!document.getElementById("aba-safra").hidden){st.kpi="todas"}else{aba("safra")}st.foco=b.dataset.foco;render()}
 });
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.limpa){e.preventDefault();e.target.click()}});
