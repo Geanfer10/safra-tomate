@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-16T18:22:10+00:00",
+ "gerado": "2026-11-16T19:27:22+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -869,17 +869,17 @@
    "nome": "Orçamento de soprador completo e 2 rotores – esteira cata-pedra",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Alta",
    "tipo": "Aquisição",
    "resp": "",
    "area": "Soprador da esteira cata-pedra",
    "ini": null,
    "fim": null,
-   "prev": 0,
+   "prev": 44450.0,
    "real": null,
    "compra": "Em cotação",
-   "fornecedor": "",
+   "fornecedor": "Mackven Máquinas Industriais (Aeromack)",
    "rc": "",
    "os": "",
    "nfe": "",
@@ -891,8 +891,23 @@
     }
    ],
    "orcamentos": [],
-   "obs": "Pedir dois orçamentos: 1) soprador completo; 2) dois rotores para o soprador da esteira cata-pedra.",
-   "materiais": [],
+   "obs": "Proposta Mackven LK-00800/2026 de 16/11/2026:\n- 1 soprador CRE 05D (8,3 m³/min, 11.000 mmca, 15 CV, IP-55, 220/380 V, 60 Hz): R$ 36.850,00\n- 2 rotores CRE 05D x R$ 3.800,00 = R$ 7.600,00\nTotal previsto: R$ 44.450,00 (IPI isento, ICMS incluso, frete não incluso – retirada em São Bernardo do Campo/SP).\nPagamento 30 DDL. Entrega 10 a 15 dias após o pedido. Garantia de 12 meses.",
+   "materiais": [
+    {
+     "desc": "Soprador CRE 05D – 8,3 m³/min, 11.000 mmca, 15 CV",
+     "cod": "",
+     "qtd": 1.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Rotor para soprador CRE 05D",
+     "cod": "",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    }
+   ],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533501786"
   },
