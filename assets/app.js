@@ -265,6 +265,24 @@ document.getElementById("fzAnt").addEventListener("click",()=>mostrarFoto(fotoAt
 document.getElementById("fzProx").addEventListener("click",()=>mostrarFoto(fotoAtual+1));
 document.getElementById("fotoZoom").addEventListener("click",e=>{if(e.target.id==="fotoZoom"||e.target.tagName==="FIGURE")fecharFoto()});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-zoom]");if(b)mostrarFoto(+b.dataset.zoom)});
+/* ---------- Largura ajustável da gaveta ---------- */
+(function(){
+  const g=document.getElementById("gaveta"),alca=document.getElementById("gvAlca"),CH="safraTomate.larguraGaveta";
+  const MIN=380, max=()=>Math.max(MIN,window.innerWidth-260);
+  const aplicar=w=>{w=Math.round(Math.min(max(),Math.max(MIN,w)));g.style.setProperty("--gv-w",w+"px");return w};
+  let salva=null;try{salva=+localStorage.getItem(CH)||null}catch(e){}
+  if(salva)aplicar(salva);
+  const guardar=w=>{try{localStorage.setItem(CH,String(w))}catch(e){}};
+  let ini=null;
+  alca.addEventListener("pointerdown",e=>{e.preventDefault();ini={x:e.clientX,w:g.getBoundingClientRect().width};g.classList.add("arrastando");alca.setPointerCapture(e.pointerId)});
+  alca.addEventListener("pointermove",e=>{if(ini)aplicar(ini.w+(ini.x-e.clientX))});
+  const soltar=()=>{if(!ini)return;ini=null;g.classList.remove("arrastando");guardar(g.getBoundingClientRect().width)};
+  alca.addEventListener("pointerup",soltar);alca.addEventListener("pointercancel",soltar);
+  alca.addEventListener("dblclick",()=>guardar(aplicar(520)));
+  alca.addEventListener("keydown",e=>{const w=g.getBoundingClientRect().width;if(e.key==="ArrowLeft"){e.preventDefault();guardar(aplicar(w+40))}else if(e.key==="ArrowRight"){e.preventDefault();guardar(aplicar(w-40))}});
+  document.getElementById("gv-expandir").addEventListener("click",()=>{const w=g.getBoundingClientRect().width;guardar(aplicar(w<max()-20?max():520))});
+  window.addEventListener("resize",()=>{const w=parseFloat(getComputedStyle(g).getPropertyValue("--gv-w"));if(w)aplicar(w)});
+})();
 function fechar(){document.getElementById("fundo").hidden=true;document.getElementById("gaveta").hidden=true;if(ultimoFoco&&ultimoFoco.focus)ultimoFoco.focus()}
 document.getElementById("gv-fechar").addEventListener("click",fechar);
 document.getElementById("fundo").addEventListener("click",fechar);
