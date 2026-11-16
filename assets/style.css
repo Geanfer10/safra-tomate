@@ -285,3 +285,14 @@ details.lst li .o{grid-column:1/-1;color:var(--muted);font-size:11.5px}
 .cat-v{font-size:20px;font-weight:700;line-height:1.15}
 .cat-d{font-size:11.5px;color:var(--muted)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Materiais da atividade */
+.doc.mt{color:var(--aut)}
+.mat-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+table.mat{min-width:0;width:100%;font-size:12.5px}
+table.mat th{background:var(--surface2);padding:6px 9px}
+table.mat td{padding:6px 9px}
+.mat-sit{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:4px;background:var(--surface2);border:1px solid var(--line);white-space:nowrap}
+.mat-sit[data-s="Recebido"],.mat-sit[data-s="Em estoque"]{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+.mat-sit[data-s="Comprado"],.mat-sit[data-s="Requisitado"]{color:var(--ele);border-color:color-mix(in srgb,var(--ele) 40%,transparent)}
+.mat-sit[data-s="A solicitar"]{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,transparent)}

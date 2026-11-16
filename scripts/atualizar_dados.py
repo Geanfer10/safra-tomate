@@ -45,6 +45,14 @@ MAX_BYTES = 25 * 1024 * 1024         # 25 MB por arquivo
 EXT_FOTO = {"jpg", "jpeg", "png", "webp", "gif", "bmp"}
 EXT_DOC = {"pdf", "xml", "xlsx", "xls", "csv", "docx", "doc", "txt", "jpg", "jpeg", "png"}
 
+# IDs das colunas dos subelementos (materiais de cada atividade)
+COL_MAT = {
+    "cod": "text_mm95jyxv",
+    "qtd": "numeric_mm95mtzq",
+    "un": "dropdown_mm95rgfs",
+    "sit": "color_mm95dx3x",
+}
+
 # IDs das colunas do quadro no Monday
 COL = {
     "safra": "dropdown_mm84n1xv",
@@ -94,6 +102,7 @@ CAMPOS_ITEM = """
   group { title }
   column_values { id text value }
   assets { id name public_url file_extension }
+  subitems { id name column_values { id text } }
 """
 
 
@@ -188,6 +197,21 @@ def salvar_anexos(cv, item, destino, tipo, usados):
     return saida
 
 
+def materiais(item):
+    """Subelementos da atividade: descrição, código, quantidade, unidade e situação."""
+    saida = []
+    for sub in item.get("subitems") or []:
+        cv = {c["id"]: (c.get("text") or "") for c in sub.get("column_values", [])}
+        saida.append({
+            "desc": sub.get("name") or "",
+            "cod": cv.get(COL_MAT["cod"], ""),
+            "qtd": numero(cv.get(COL_MAT["qtd"])),
+            "un": cv.get(COL_MAT["un"], ""),
+            "sit": cv.get(COL_MAT["sit"], ""),
+        })
+    return saida
+
+
 def converter(item, destino):
     dept = (item.get("group") or {}).get("title", "").strip()
     if dept not in DEPARTAMENTOS:
@@ -228,6 +252,7 @@ def converter(item, destino):
         "fotos": salvar_anexos(cv.get(COL["fotos"]), item, destino, "foto", usados),
         "orcamentos": salvar_anexos(cv.get(COL["orcamentos"]), item, destino, "doc", usados),
         "obs": t("obs"),
+        "materiais": materiais(item),
         "url": url,
     }
 

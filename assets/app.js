@@ -1,4 +1,5 @@
 const ico={
+ caixa:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>',
  foto:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg>',
  clip:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11l-8.5 8.5a5 5 0 01-7-7L14 4a3.5 3.5 0 015 5l-8.5 8.5a2 2 0 01-3-3L15 7"/></svg>',
  doc:'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg>'
@@ -190,7 +191,8 @@ function tabela(L){
   const linha=d=>{const e=efetivo(d);const pc=d.prioridade==="Crítica"?"crit":d.prioridade==="Alta"?"alta":"";
     const docs=[d.os?`<span class="doc">OS ${esc(d.os.replace(/^OS-?/,""))}</span>`:"",d.nfe?`<span class="doc nf">${esc(d.nfe)}</span>`:"",
       (d.fotos||[]).length?`<span class="doc ft" title="Fotos do local">${ico.foto}${d.fotos.length}</span>`:"",
-      (d.orcamentos||[]).length?`<span class="doc oc" title="Orçamentos anexados">${ico.clip}${d.orcamentos.length}</span>`:""].join("");
+      (d.orcamentos||[]).length?`<span class="doc oc" title="Orçamentos anexados">${ico.clip}${d.orcamentos.length}</span>`:"",
+      (d.materiais||[]).length?`<span class="doc mt" title="Materiais listados">${ico.caixa}${d.materiais.length}</span>`:""].join("");
     return `<tr id="a${d.id}" class="${pc?"pri-"+pc:""} abre" data-abre="${d.id}" tabindex="0">
     <td><b>${esc(d.nome)}</b><div class="muted"><span class="pri-t ${pc==="crit"?"c":pc==="alta"?"a":""}">${esc(d.prioridade)}</span></div></td>
     <td>${esc(d.area)}</td><td>${esc(d.tipo)}</td>
@@ -238,6 +240,7 @@ function abrir(id){
     <div class="gv-sec"><h3>${ico.foto} Fotos do local</h3>${fotos.length?`<div class="fotos">${fotos.map((f,i)=>`<figure><button type="button" class="foto-btn" data-zoom="${i}" aria-label="Ampliar foto ${esc(f.nome)}"><img src="${esc(f.url)}" alt="${esc(f.nome)}" loading="lazy"></button><figcaption>${esc(f.nome)}</figcaption></figure>`).join("")}</div>`:`<div class="sem-arq">Nenhuma foto anexada no Monday.</div>`}</div>
     <div class="gv-sec"><h3>${ico.clip} Orçamentos</h3>${orc.length?`<ul class="arqs">${orc.map(arq).join("")}</ul>`:`<div class="sem-arq">Nenhum orçamento anexado.</div>`}</div>
     <div class="gv-sec"><h3>${ico.doc} NF-e</h3>${d.nfeArq?`<ul class="arqs">${arq(d.nfeArq)}</ul>`:`<div class="sem-arq">${d.nfe?"Número informado, arquivo não anexado.":"Sem nota fiscal vinculada."}</div>`}</div>
+    <div class="gv-sec"><h3>${ico.caixa} Materiais</h3>${(d.materiais||[]).length?`<div class="mat-wrap"><table class="mat"><thead><tr><th>Código</th><th>Descrição</th><th class="r">Qtd.</th><th>Situação</th></tr></thead><tbody>${d.materiais.map(m=>`<tr><td class="num">${esc(m.cod)||"—"}</td><td>${esc(m.desc)}</td><td class="r num">${m.qtd!=null?m.qtd.toLocaleString("pt-BR"):"—"} ${esc(m.un)}</td><td>${m.sit?`<span class="mat-sit" data-s="${esc(m.sit)}">${esc(m.sit)}</span>`:"—"}</td></tr>`).join("")}</tbody></table></div>`:`<div class="sem-arq">Nenhum material listado no Monday.</div>`}</div>
     ${d.obs?`<div class="gv-sec"><h3>Observações / lições aprendidas</h3><p style="margin:0">${esc(d.obs)}</p></div>`:""}
     ${d.url?`<a class="btn-monday" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Abrir no Monday</a>`:""}`;
   fotosAbertas=fotos;
