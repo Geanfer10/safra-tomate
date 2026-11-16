@@ -231,6 +231,7 @@ function abrir(id){
       ${campo("Nº Ordem de Serviço",esc(d.os),1)}
       ${campo("Nº NF-e",esc(d.nfe),1)}
       ${campo("Equipamento / Área",esc(d.area))}
+      ${(d.bombas||[]).length?`<div class="gv-campo" style="grid-column:1/-1"><div class="l">Bomba(s) Netzsch</div><div class="v">${d.bombas.map(esc).join("<br>")}</div></div>`:""}
       ${campo("Tipo",esc(d.tipo))}
       ${campo("Prazo",d.ini?`${dt(d.ini)} → ${dt(d.fim)}`:"",1)}
       ${campo("Status da compra",esc(d.compra))}

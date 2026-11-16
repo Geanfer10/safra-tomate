@@ -73,6 +73,7 @@ COL = {
     "nfe": "text_mm84pz70",
     "nfe_arq": "file_mm84gxd5",
     "fotos": "file_mm84qj1x",
+    "bomba": "board_relation_mm95ewdc",
 }
 
 
@@ -100,7 +101,7 @@ def monday(query, variables, token):
 CAMPOS_ITEM = """
   id name
   group { title }
-  column_values { id text value }
+  column_values { id text value ... on BoardRelationValue { display_value } }
   assets { id name public_url file_extension }
   subitems { id name column_values { id text } }
 """
@@ -253,6 +254,7 @@ def converter(item, destino):
         "orcamentos": salvar_anexos(cv.get(COL["orcamentos"]), item, destino, "doc", usados),
         "obs": t("obs"),
         "materiais": materiais(item),
+        "bombas": [b.strip() for b in ((cv.get(COL["bomba"]) or {}).get("display_value") or "").split(",") if b.strip()],
         "url": url,
     }
 
