@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-12T11:42:08+00:00",
+ "gerado": "2026-11-16T17:54:28+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -24,6 +24,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "Válvulas dando passagem",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292601481"
   },
   {
@@ -49,6 +50,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292709640"
   },
   {
@@ -74,6 +76,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292636361"
   },
   {
@@ -99,6 +102,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291515430"
   },
   {
@@ -124,6 +128,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291546554"
   },
   {
@@ -149,6 +154,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292670447"
   },
   {
@@ -174,6 +180,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291534308"
   },
   {
@@ -199,6 +206,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13298321191"
   },
   {
@@ -224,6 +232,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "Comprar a mesma quantidade de colmeia que é comprada todos os anos para as torres de resfriamento. Confirmar a quantidade e o fornecedor pelas compras dos anos anteriores.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533422585"
   },
   {
@@ -254,6 +263,7 @@
    ],
    "orcamentos": [],
    "obs": "Comprar um redutor igual ao da tremonha 2 para instalar na tremonha 01. Foto: redutor de referência (circulado).",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533408459"
   },
   {
@@ -284,6 +294,7 @@
    ],
    "orcamentos": [],
    "obs": "Pegar a numeração da tampa quando a bomba for desmontada.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533402167"
   },
   {
@@ -314,6 +325,7 @@
    ],
    "orcamentos": [],
    "obs": "Procurar o Elenilton da montagem para fazer o levantamento de material.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533393775"
   },
   {
@@ -339,6 +351,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "Orçar peneiras com furo 1,2 mm e furo 1,0 mm para:\n- Tropical: furo 1,2 e furo 1,0\n- Bertocchi: furo 1,2 e furo 1,0\n- Giubileo: furo 1,2 e furo 1,0",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533423446"
   },
   {
@@ -364,6 +377,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291515052"
   },
   {
@@ -394,6 +408,7 @@
    ],
    "orcamentos": [],
    "obs": "Elaborar uma melhoria para baixar os mangotes e melhorar a limpeza.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533485001"
   },
   {
@@ -424,6 +439,7 @@
    ],
    "orcamentos": [],
    "obs": "Orçar bomba igual à existente no BL do tanque de suco, conforme os dados da plaqueta.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533429264"
   },
   {
@@ -454,6 +470,7 @@
    ],
    "orcamentos": [],
    "obs": "Orçar bomba nova da Netzsch para substituir a bomba de extração do concentrador Tropical.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533435876"
   },
   {
@@ -484,6 +501,43 @@
    ],
    "orcamentos": [],
    "obs": "Orçar corrente e 10 engrenagens da esteira de seleção de tomate 2.",
+   "materiais": [
+    {
+     "desc": "33571 - CORRENTE PASSO 2\" ASA 5008 C/ PINO SALIENTE 7/16 INOX 304",
+     "cod": "33571",
+     "qtd": 50.0,
+     "un": "M",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "3049445 - ENGRENAGEM DUPLA ACO CARBONO ASA 60 PASSO 3/4 76 DENTES",
+     "cod": "3049445",
+     "qtd": 1.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "3049446 - ENGRENAGEM DUPLA ACO CARBONO ASA 60 PASSO 3/4 37 DENTES",
+     "cod": "3049446",
+     "qtd": 1.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "3049447 - ENGRENAGEM SIMPLES ACO CARBONO PASSO 2\" 21 DENTES",
+     "cod": "3049447",
+     "qtd": 8.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "3049448 - ENGRENAGEM SIMPLES ACO CARBONO PASSO 2\" 14 DENTES",
+     "cod": "3049448",
+     "qtd": 2.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    }
+   ],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533426608"
   },
   {
@@ -514,6 +568,7 @@
    ],
    "orcamentos": [],
    "obs": "Pedir dois orçamentos: 1) soprador completo; 2) dois rotores para o soprador da esteira cata-pedra.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533501786"
   },
   {
@@ -544,6 +599,7 @@
    ],
    "orcamentos": [],
    "obs": "Procurar fornecedor para a válvula de retenção da linha da planta asséptica.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533452116"
   },
   {
@@ -569,6 +625,7 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "Elaborar projeto para mudar o vagão de cavaco da caldeira Secamaq.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533506669"
   },
   {
@@ -599,6 +656,7 @@
    ],
    "orcamentos": [],
    "obs": "Trocar a tubulação de saída da bomba da tremonha para 6\". Verificar com o Elenilton o tipo de tubo (parede) e as medidas exatas.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533427161"
   },
   {
@@ -629,6 +687,7 @@
    ],
    "orcamentos": [],
    "obs": "Procurar o Elenilton para verificar o material. Parede do tubo recomendada: 2 mm.",
+   "materiais": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533451844"
   }
  ]
