@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-16T17:54:28+00:00",
+ "gerado": "2026-11-16T18:22:10+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -25,6 +25,7 @@
    "orcamentos": [],
    "obs": "Válvulas dando passagem",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292601481"
   },
   {
@@ -51,6 +52,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292709640"
   },
   {
@@ -77,6 +79,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292636361"
   },
   {
@@ -103,6 +106,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291515430"
   },
   {
@@ -129,6 +133,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291546554"
   },
   {
@@ -155,6 +160,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292670447"
   },
   {
@@ -181,6 +187,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291534308"
   },
   {
@@ -207,6 +214,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13298321191"
   },
   {
@@ -232,7 +240,16 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "Comprar a mesma quantidade de colmeia que é comprada todos os anos para as torres de resfriamento. Confirmar a quantidade e o fornecedor pelas compras dos anos anteriores.",
-   "materiais": [],
+   "materiais": [
+    {
+     "desc": "36495 - ENCHIMENTO TP GRADE TRAPEZOIDAL POLIPROPILENO",
+     "cod": "36495",
+     "qtd": 20.0,
+     "un": "M³",
+     "sit": "A solicitar"
+    }
+   ],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533422585"
   },
   {
@@ -264,6 +281,7 @@
    "orcamentos": [],
    "obs": "Comprar um redutor igual ao da tremonha 2 para instalar na tremonha 01. Foto: redutor de referência (circulado).",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533408459"
   },
   {
@@ -295,6 +313,7 @@
    "orcamentos": [],
    "obs": "Pegar a numeração da tampa quando a bomba for desmontada.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533402167"
   },
   {
@@ -326,6 +345,7 @@
    "orcamentos": [],
    "obs": "Procurar o Elenilton da montagem para fazer o levantamento de material.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533393775"
   },
   {
@@ -352,6 +372,7 @@
    "orcamentos": [],
    "obs": "Orçar peneiras com furo 1,2 mm e furo 1,0 mm para:\n- Tropical: furo 1,2 e furo 1,0\n- Bertocchi: furo 1,2 e furo 1,0\n- Giubileo: furo 1,2 e furo 1,0",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533423446"
   },
   {
@@ -377,7 +398,306 @@
    "fotos": [],
    "orcamentos": [],
    "obs": "",
-   "materiais": [],
+   "materiais": [
+    {
+     "desc": "ESTATOR NM063 04 S EP - NDB4963392",
+     "cod": "36276",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "BUCHA DE ACOPLAMENTO CÓD. NDB4960637",
+     "cod": "3449490",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "PINO CILÍNDRICO CÓD. NDB4825301",
+     "cod": "36287",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "VEDAÇÃO SM CÓD. 883089",
+     "cod": "36335",
+     "qtd": 4.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "BUCHA DE ACOPLAMENTO CÓD. NDB4825304",
+     "cod": "36241",
+     "qtd": 6.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "EIXO ACIONAMENTO B NM090 S AISI304 NDB4825594",
+     "cod": "47592",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ANEL-O CÓD. 516205",
+     "cod": "36216",
+     "qtd": 4.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "BUCHA NDB 4825307",
+     "cod": "36240",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ESTATOR 157356",
+     "cod": "36282",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "VEDACAO SM K NE100 873396 NETZSCH",
+     "cod": "36336",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "43988 - FITA MAIOR ACO INOX 3/8X600MM 900140 NETZSCH",
+     "cod": "43988",
+     "qtd": 3.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "44008 - FITA MENOR ACO INOX 3/8X300MM 900137 NETZSCH",
+     "cod": "44008",
+     "qtd": 3.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ESTATOR NM053 02 S SBBPF STP3 - NDB4957096",
+     "cod": "43976",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ROTOR B NM053 02S12 304 UM80 CROM - NDB4961091",
+     "cod": "36319",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "PINO CIL/B NM053 AISI316 862155 NETZSCH",
+     "cod": "36299",
+     "qtd": 4.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "PINO CI NM053 B-P 304 NDB4978234 NETZSCH",
+     "cod": "47628",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ANEL ORING 65,00X3,50MM PERBUNAN PB 70-80SH NDB517020 NETZSCH",
+     "cod": "47631",
+     "qtd": 8.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "EIXO LIGACAO B NM053 AISI304 NDB4825835 NETZSCH",
+     "cod": "47651",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "VEDACAO SM B NE 40 SBE NDB877401 NETZSCH",
+     "cod": "47632",
+     "qtd": 4.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "SELO MECANICO MG1/055-G60 Q1Q1EGG 677391",
+     "cod": "34344",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "EIXO DE ACOPLAMENTO CÓD. NDB4961623",
+     "cod": "36259",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ESTATOR NM063 01L SBBPF/1020 NDB4956611 NETZSCH",
+     "cod": "45806",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "PINO CI B NE50A AISI316 868663 NETZSCH",
+     "cod": "36293",
+     "qtd": 6.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "SELO MECANICO ME MG1/065-G60 Q1Q1EGG NMP5027027 NETZSCH",
+     "cod": "34343",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ANEL ORING 70,00X3,50MM PERBUNAN PB 70-80SH NDB516327 NETZSCH",
+     "cod": "36226",
+     "qtd": 4.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "VEDACAO SM B NE 50 NDB876657 NETZSCH",
+     "cod": "47646",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "NETZSCH 594034 ANEL ORING 58 X 20MM* (ERRADO)",
+     "cod": "36224",
+     "qtd": 8.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ANEL ORING 31,00X18,50MM PB 460113 NETZSCH",
+     "cod": "36220",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "EIXO ACOPLAMENTO B NE50A AISI304 NDB4996050 NETZSCH",
+     "cod": "36256",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ESTATOR 2NE50A SBE/1020 CODIGO 002588 NETZSCH",
+     "cod": "36265",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ESTATOR NES50A SBE/1020 NDB4952624 NETZSCH",
+     "cod": "43968",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "EIXO ACIONAMENTO NE50A AISI304 868648 NETZSCH",
+     "cod": "36252",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ESTATOR NE69A SBE/1020 CODIGO 003793 NETZSCH",
+     "cod": "36268",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "PINO CILINDRICO P/BOMBA COD.868662 NETZSCH",
+     "cod": "36297",
+     "qtd": 4.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ANEL ORING 42X14MM COD.517096 NETZSCH",
+     "cod": "36222",
+     "qtd": 4.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ROTOR B NE69A AISI304 UM90 NDB4956023 NETZSCH",
+     "cod": "36312",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ANEL ORING 88X3,5MM PB COD.517018 NETZSCH",
+     "cod": "36228",
+     "qtd": 8.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ESTATOR 4NE50A SBE/1020 CODIGO 003516 NETZSCH",
+     "cod": "36267",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "ROTOR B 4NE50A AISI304 UM-90 865768 NETZSCH",
+     "cod": "36311",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "EIXO DE ACOPLAMENTO CÓD. 892624",
+     "cod": "36254",
+     "qtd": 1.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "VEDAÇÃO SM CÓD. NDB4971492",
+     "cod": "36333",
+     "qtd": 2.0,
+     "un": "PÇ",
+     "sit": "A solicitar"
+    }
+   ],
+   "bombas": [
+    "Bomba Extração UHV Tropical",
+    "Bomba Extração 1º Efeito MV 400",
+    "Bomba Transferência MV 400",
+    "Bomba de Alimentação de Suco MV 400 e Bomba de Extração UHV SIMA",
+    "Bomba Alimentação de Suco Preparação",
+    "Bomba Transferência de Produto Planta SIMA",
+    "Bomba Extração 1º Efeito Tropical",
+    "Bomba da Tremonha 01/02",
+    "Bomba de Alimentação Pistão Tropical e Bomba de Alimentação SIMA"
+   ],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291515052"
   },
   {
@@ -409,6 +729,7 @@
    "orcamentos": [],
    "obs": "Elaborar uma melhoria para baixar os mangotes e melhorar a limpeza.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533485001"
   },
   {
@@ -416,7 +737,7 @@
    "nome": "Orçamento de bomba igual à do BL – tanque de suco",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Média",
    "tipo": "Aquisição",
    "resp": "",
@@ -440,6 +761,7 @@
    "orcamentos": [],
    "obs": "Orçar bomba igual à existente no BL do tanque de suco, conforme os dados da plaqueta.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533429264"
   },
   {
@@ -447,7 +769,7 @@
    "nome": "Orçamento de bomba nova Netzsch – extração do concentrador Tropical",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Alta",
    "tipo": "Aquisição",
    "resp": "",
@@ -471,6 +793,7 @@
    "orcamentos": [],
    "obs": "Orçar bomba nova da Netzsch para substituir a bomba de extração do concentrador Tropical.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533435876"
   },
   {
@@ -538,6 +861,7 @@
      "sit": "A solicitar"
     }
    ],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533426608"
   },
   {
@@ -569,6 +893,7 @@
    "orcamentos": [],
    "obs": "Pedir dois orçamentos: 1) soprador completo; 2) dois rotores para o soprador da esteira cata-pedra.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533501786"
   },
   {
@@ -600,6 +925,7 @@
    "orcamentos": [],
    "obs": "Procurar fornecedor para a válvula de retenção da linha da planta asséptica.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533452116"
   },
   {
@@ -626,6 +952,7 @@
    "orcamentos": [],
    "obs": "Elaborar projeto para mudar o vagão de cavaco da caldeira Secamaq.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533506669"
   },
   {
@@ -657,6 +984,7 @@
    "orcamentos": [],
    "obs": "Trocar a tubulação de saída da bomba da tremonha para 6\". Verificar com o Elenilton o tipo de tubo (parede) e as medidas exatas.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533427161"
   },
   {
@@ -688,6 +1016,7 @@
    "orcamentos": [],
    "obs": "Procurar o Elenilton para verificar o material. Parede do tubo recomendada: 2 mm.",
    "materiais": [],
+   "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533451844"
   }
  ]
