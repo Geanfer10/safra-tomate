@@ -29,8 +29,9 @@ const EXEMPLO=EXEMPLO_BASE.map(d=>Object.assign({},d,EXTRAS[d.id]||{}));
 let DADOS=[];
 const HOJE=new Date(); HOJE.setHours(0,0,0,0);
 const st={safra:null,kpi:"todas",dept:null,foco:null,tipo:""};
-const brl=v=>v==null?"—":v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
-const mil=v=>v>=1e6?"R$ "+(v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mi":v>=1000?"R$ "+(v/1000).toLocaleString("pt-BR",{maximumFractionDigits:0})+" mil":brl(v);
+// Valores sempre por extenso no padrão brasileiro: R$ 44.450,00
+const brl=v=>v==null?"—":Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:2,maximumFractionDigits:2});
+const mil=brl;
 const dt=s=>s?s.slice(8,10)+"/"+s.slice(5,7)+"/"+s.slice(2,4):"—";
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const efetivo=d=>(d.status!=="Concluído"&&d.status!=="Cancelado"&&d.fim&&new Date(d.fim+"T00:00")<HOJE)?"Atrasado":d.status;

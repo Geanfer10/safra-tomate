@@ -306,3 +306,6 @@ table.mat td{padding:6px 9px}
 .gv-acoes{display:flex;gap:6px}
 table.mat td.r{white-space:nowrap}
 @media (max-width:860px){.gv-alca,#gv-expandir{display:none}}
+/* Valores em reais por extenso cabem nos cartões */
+.kpi .v{font-size:clamp(18px,1.7vw,25px);overflow-wrap:anywhere}
+.cat-v{overflow-wrap:anywhere}
