@@ -2,9 +2,9 @@ name: Atualizar dados do painel
 
 on:
   schedule:
-    # A cada 10 minutos, das 6h às 20h59 (horário de Brasília), de segunda a sábado.
+    # A cada 10 minutos, das 6h às 20h59 (horário de Brasília), de segunda a sexta.
     # Obs.: o GitHub pode atrasar ou pular execuções agendadas em horários de pico.
-    - cron: "*/10 9-23 * * 1-6"
+    - cron: "*/10 9-23 * * 1-5"
   workflow_dispatch: {}
 
 # Permissão mínima: só pode gravar no próprio repositório

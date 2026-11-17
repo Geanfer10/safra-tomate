@@ -39,7 +39,7 @@ Todos os dados e anexos ficam abertos no painel, sem senha.
 2. **Pages** — *Settings → Pages → Build and deployment*: Source **Deploy from a branch**, branch `main`, pasta `/ (root)`.
 3. **Primeira carga** — *Actions → Atualizar dados do painel → Run workflow*.
 
-Depois disso, a atualização roda sozinha a cada 10 minutos, das 6h às 21h, de segunda a sábado. O GitHub pode atrasar execuções agendadas; para atualizar na hora, use *Actions → Atualizar dados do painel → Run workflow*.
+Depois disso, a atualização roda sozinha a cada 10 minutos, das 6h às 21h, de segunda a sexta. O GitHub pode atrasar execuções agendadas; para atualizar na hora, use *Actions → Atualizar dados do painel → Run workflow*.
 
 ## Estrutura
 
