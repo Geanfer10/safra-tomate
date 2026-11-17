@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-16T19:27:22+00:00",
+ "gerado": "2026-11-17T16:43:40+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -808,10 +808,10 @@
    "area": "Esteira de seleção de tomate 2",
    "ini": null,
    "fim": null,
-   "prev": 0,
+   "prev": 66958.0,
    "real": null,
    "compra": "Em cotação",
-   "fornecedor": "",
+   "fornecedor": "Casa das Transmissões Correntes e Rolamentos (Aparecida de Goiânia-GO)",
    "rc": "",
    "os": "",
    "nfe": "",
@@ -822,8 +822,13 @@
      "url": "data/arquivos/13533426608/3383475439-WhatsApp-Image-2026-11-11-at-11.33.10.jpg"
     }
    ],
-   "orcamentos": [],
-   "obs": "Orçar corrente e 10 engrenagens da esteira de seleção de tomate 2.",
+   "orcamentos": [
+    {
+     "nome": "GOIAS VERDE 12684.pdf",
+     "url": "data/arquivos/13533426608/3393857814-GOIAS-VERDE-12684.pdf"
+    }
+   ],
+   "obs": "Orçar corrente e 10 engrenagens da esteira de seleção de tomate 2.\n\nOrçamento Casa das Transmissões nº 12684 de 17/11/2026 (vendedor Darlyano, (62) 3273-1022):\n- Corrente passo 2\" c/ pino saliente 7/16 inox 304 – 58 m x R$ 962,00 = R$ 55.796,00\n- Engrenagem 26076 AT2 (76 dentes) – 1 pç = R$ 1.322,00\n- Engrenagem 26037 AT2 (37 dentes) – 1 pç = R$ 652,00\n- Engrenagem 2\" Z-21 AT2 aço carbono – 8 pç x R$ 998,00 = R$ 7.984,00\n- Engrenagem 2\" Z-14 AT2 aço carbono – 2 pç x R$ 602,00 = R$ 1.204,00\nTotal: R$ 66.958,00. Pagamento boleto 30 dias. Entrega 16 a 22 dias. Frete FOB.\nATENÇÃO: orçamento com 58 m de corrente; a lista de materiais pede 50 m.",
    "materiais": [
     {
      "desc": "33571 - CORRENTE PASSO 2\" ASA 5008 C/ PINO SALIENTE 7/16 INOX 304",
@@ -890,7 +895,12 @@
      "url": "data/arquivos/13533501786/3383472565-WhatsApp-Image-2026-11-11-at-11.31.19.jpg"
     }
    ],
-   "orcamentos": [],
+   "orcamentos": [
+    {
+     "nome": "PROPOSTA COMERCIAL.doc",
+     "url": "data/arquivos/13533501786/3393858399-PROPOSTA-COMERCIAL.doc"
+    }
+   ],
    "obs": "Proposta Mackven LK-00800/2026 de 16/11/2026:\n- 1 soprador CRE 05D (8,3 m³/min, 11.000 mmca, 15 CV, IP-55, 220/380 V, 60 Hz): R$ 36.850,00\n- 2 rotores CRE 05D x R$ 3.800,00 = R$ 7.600,00\nTotal previsto: R$ 44.450,00 (IPI isento, ICMS incluso, frete não incluso – retirada em São Bernardo do Campo/SP).\nPagamento 30 DDL. Entrega 10 a 15 dias após o pedido. Garantia de 12 meses.",
    "materiais": [
     {
