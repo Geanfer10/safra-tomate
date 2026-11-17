@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-17T16:43:40+00:00",
+ "gerado": "2026-11-17T17:13:21+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -257,7 +257,7 @@
    "nome": "Compra de redutor para a tremonha 01 (modelo da tremonha 2)",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Alta",
    "tipo": "Aquisição",
    "resp": "",
@@ -801,7 +801,7 @@
    "nome": "Orçamento de corrente e 10 engrenagens – esteira de seleção de tomate 2",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Alta",
    "tipo": "Aquisição",
    "resp": "",
@@ -904,15 +904,15 @@
    "obs": "Proposta Mackven LK-00800/2026 de 16/11/2026:\n- 1 soprador CRE 05D (8,3 m³/min, 11.000 mmca, 15 CV, IP-55, 220/380 V, 60 Hz): R$ 36.850,00\n- 2 rotores CRE 05D x R$ 3.800,00 = R$ 7.600,00\nTotal previsto: R$ 44.450,00 (IPI isento, ICMS incluso, frete não incluso – retirada em São Bernardo do Campo/SP).\nPagamento 30 DDL. Entrega 10 a 15 dias após o pedido. Garantia de 12 meses.",
    "materiais": [
     {
-     "desc": "Soprador CRE 05D – 8,3 m³/min, 11.000 mmca, 15 CV",
-     "cod": "",
+     "desc": "39246 - COMPRESSOR RADIAL CRE05D MOTOR 15CV 2POLOS 220/380V 60HZ VAZAO 8,3M³ PRESSAO 11000MMCA",
+     "cod": "39246",
      "qtd": 1.0,
      "un": "UN",
      "sit": "A solicitar"
     },
     {
-     "desc": "Rotor para soprador CRE 05D",
-     "cod": "",
+     "desc": "36557 -ROTOR COMPRESSOR RADIAL CRE 05D",
+     "cod": "36557",
      "qtd": 2.0,
      "un": "PÇ",
      "sit": "A solicitar"
