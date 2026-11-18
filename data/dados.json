@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-18T17:28:30+00:00",
+ "gerado": "2026-11-18T17:29:33+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -25,6 +25,7 @@
    "orcamentos": [],
    "obs": "Válvulas dando passagem",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292601481"
   },
@@ -52,6 +53,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292709640"
   },
@@ -79,6 +81,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292636361"
   },
@@ -106,6 +109,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291515430"
   },
@@ -133,6 +137,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291546554"
   },
@@ -160,6 +165,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13292670447"
   },
@@ -187,6 +193,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13291534308"
   },
@@ -214,6 +221,7 @@
    "orcamentos": [],
    "obs": "",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13298321191"
   },
@@ -249,6 +257,7 @@
      "sit": "A solicitar"
     }
    ],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533422585"
   },
@@ -281,6 +290,7 @@
    "orcamentos": [],
    "obs": "Comprar um redutor igual ao da tremonha 2 para instalar na tremonha 01. Foto: redutor de referência (circulado).",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533408459"
   },
@@ -313,6 +323,7 @@
    "orcamentos": [],
    "obs": "Pegar a numeração da tampa quando a bomba for desmontada.",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533402167"
   },
@@ -345,6 +356,7 @@
    "orcamentos": [],
    "obs": "Procurar o Elenilton da montagem para fazer o levantamento de material.",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533393775"
   },
@@ -372,6 +384,7 @@
    "orcamentos": [],
    "obs": "Orçar peneiras com furo 1,2 mm e furo 1,0 mm para:\n- Tropical: furo 1,2 e furo 1,0\n- Bertocchi: furo 1,2 e furo 1,0\n- Giubileo: furo 1,2 e furo 1,0",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533423446"
   },
@@ -687,6 +700,7 @@
      "sit": "A solicitar"
     }
    ],
+   "cotacoes": [],
    "bombas": [
     "Bomba Extração UHV Tropical",
     "Bomba Extração 1º Efeito MV 400",
@@ -729,6 +743,7 @@
    "orcamentos": [],
    "obs": "Elaborar uma melhoria para baixar os mangotes e melhorar a limpeza.",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533485001"
   },
@@ -772,20 +787,34 @@
      "qtd": 1.0,
      "un": "UN",
      "sit": "A solicitar"
+    }
+   ],
+   "cotacoes": [
+    {
+     "nome": "Cotação Inoxnew – Bomba sanitária NG-03 inox 316, 20 HP",
+     "forn": "Inoxnew / Montherm",
+     "prop": "2.839WA Rev.0",
+     "valor": 36720.0,
+     "frete": "FOB",
+     "prazo": "Final de janeiro",
+     "validade": "2026-12-16",
+     "pag": "21 DDL",
+     "analise": "Em análise",
+     "obs": "Preço vinculado ao dólar (PTAX 5,78) e ao inox. Impostos inclusos. Sem montagem/instalação. Garantia 12 meses.",
+     "arquivo": null
     },
     {
-     "desc": "Cotação Inoxnew – Bomba sanitária NG-03 inox 316, 20 HP",
-     "cod": "",
-     "qtd": null,
-     "un": "",
-     "sit": "A solicitar"
-    },
-    {
-     "desc": "Cotação Bombinox – Bomba BL80/32 inox 316L, 20 HP",
-     "cod": "",
-     "qtd": null,
-     "un": "",
-     "sit": "A solicitar"
+     "nome": "Cotação Bombinox – Bomba BL80/32 inox 316L, 20 HP",
+     "forn": "Bombinox (São José-SC)",
+     "prop": "Orçamento 106303",
+     "valor": 33650.0,
+     "frete": "FOB",
+     "prazo": "4 dias úteis",
+     "validade": "2026-11-28",
+     "pag": "4x R$ 8.412,50 (16/12/26 a 10/03/27)",
+     "analise": "Em análise",
+     "obs": "BL80/32 20HP 2P, 316L, SMS 2.1/2 x 2, rotor semiaberto 170 mm, selo SiC x SiC Viton, NR-12. Suco de tomate até 90 °C, 50.000 L/h a 50 mca. IPI 0%, ICMS 7%. Frete FOB via Rodonaves. Validade de 10 dias (a partir de 18/11). Pagamento mediante aprovação de cadastro. Contato: Nilda, (48) 99979-6933.",
+     "arquivo": null
     }
    ],
    "bombas": [],
@@ -831,13 +860,21 @@
      "qtd": 1.0,
      "un": "CJ",
      "sit": "A solicitar"
-    },
+    }
+   ],
+   "cotacoes": [
     {
-     "desc": "Cotação NETZSCH – Bomba NEMO NM063BY04S24B completa",
-     "cod": "",
-     "qtd": null,
-     "un": "",
-     "sit": "A solicitar"
+     "nome": "Cotação NETZSCH – Bomba NEMO NM063BY04S24B completa",
+     "forn": "NETZSCH do Brasil",
+     "prop": "OF-SN6287 Rev.00",
+     "valor": 68550.0,
+     "frete": "CIF",
+     "prazo": "75 dias",
+     "validade": "2026-12-18",
+     "pag": "28 DDF",
+     "analise": "Em análise",
+     "obs": "Inclui motorredutor SEW 11 kW e base. IPI zero, ICMS 7%. ATENÇÃO: frete CIF cotado posto Araguaína/TO – confirmar Luziânia-GO.",
+     "arquivo": null
     }
    ],
    "bombas": [
@@ -913,13 +950,21 @@
      "qtd": 2.0,
      "un": "UN",
      "sit": "A solicitar"
-    },
+    }
+   ],
+   "cotacoes": [
     {
-     "desc": "Cotação Casa das Transmissões – Corrente 58 m + 12 engrenagens",
-     "cod": "",
-     "qtd": null,
-     "un": "",
-     "sit": "A solicitar"
+     "nome": "Cotação Casa das Transmissões – Corrente 58 m + 12 engrenagens",
+     "forn": "Casa das Transmissões",
+     "prop": "12684",
+     "valor": 66958.0,
+     "frete": "FOB",
+     "prazo": "16 a 22 dias",
+     "validade": null,
+     "pag": "Boleto 30 dias",
+     "analise": "Em análise",
+     "obs": "Cotado com 58 m de corrente (lista de materiais pede 50 m; com 50 m o total seria R$ 59.262,00).",
+     "arquivo": null
     }
    ],
    "bombas": [],
@@ -972,13 +1017,21 @@
      "qtd": 2.0,
      "un": "PÇ",
      "sit": "A solicitar"
-    },
+    }
+   ],
+   "cotacoes": [
     {
-     "desc": "Cotação Mackven – Soprador CRE 05D + 2 rotores",
-     "cod": "",
-     "qtd": null,
-     "un": "",
-     "sit": "A solicitar"
+     "nome": "Cotação Mackven – Soprador CRE 05D + 2 rotores",
+     "forn": "Mackven (Aeromack)",
+     "prop": "LK-00800/2026",
+     "valor": 44450.0,
+     "frete": "FOB",
+     "prazo": "10 a 15 dias",
+     "validade": null,
+     "pag": "30 DDL",
+     "analise": "Em análise",
+     "obs": "Soprador R$ 36.850,00 + 2 rotores x R$ 3.800,00. Retirada em São Bernardo do Campo/SP. IPI isento, ICMS incluso. Garantia 12 meses.",
+     "arquivo": null
     }
    ],
    "bombas": [],
@@ -1013,6 +1066,7 @@
    "orcamentos": [],
    "obs": "Procurar fornecedor para a válvula de retenção da linha da planta asséptica.",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533452116"
   },
@@ -1040,6 +1094,7 @@
    "orcamentos": [],
    "obs": "Elaborar projeto para mudar o vagão de cavaco da caldeira Secamaq.",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533506669"
   },
@@ -1072,6 +1127,7 @@
    "orcamentos": [],
    "obs": "Trocar a tubulação de saída da bomba da tremonha para 6\". Verificar com o Elenilton o tipo de tubo (parede) e as medidas exatas.",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533427161"
   },
@@ -1104,6 +1160,7 @@
    "orcamentos": [],
    "obs": "Procurar o Elenilton para verificar o material. Parede do tubo recomendada: 2 mm.",
    "materiais": [],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533451844"
   }
