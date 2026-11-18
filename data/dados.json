@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-18T14:40:17+00:00",
+ "gerado": "2026-11-18T15:12:49+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -789,10 +789,10 @@
    "area": "Concentrador Tropical – bomba de extração",
    "ini": null,
    "fim": null,
-   "prev": 0,
+   "prev": 68550.0,
    "real": null,
    "compra": "Em cotação",
-   "fornecedor": "",
+   "fornecedor": "NETZSCH do Brasil (Pomerode-SC)",
    "rc": "",
    "os": "",
    "nfe": "",
@@ -804,9 +804,19 @@
     }
    ],
    "orcamentos": [],
-   "obs": "Orçar bomba nova da Netzsch para substituir a bomba de extração do concentrador Tropical.",
-   "materiais": [],
-   "bombas": [],
+   "obs": "Orçar bomba nova da Netzsch para substituir a bomba de extração do concentrador Tropical.\n\nOferta NETZSCH OF-SN6287 Rev.00 de 18/11/2026 (Hender Soares, (62) 9 9151-6253, hender.soares@netzsch.com):\n- 1 bomba helicoidal NEMO NM063BY04S24B (CP ref. 850007065): R$ 68.550,00\n  Carcaça inox 304 com polimento interno, rotor AISI 304 UM80, estator Nemolast S66M, selo mecânico 8016218, sucção e recalque SMS 4\", horizontal.\n  Inclui motorredutor NETZSCH/SEW NS 87, 185 rpm, i=9,58, 11 kW, 4 polos, IE3, IP-55; base metálica tipo T; manual.\n  Condição de projeto: molho de tomate a 80 °C, 8,6 m³/h, 18 bar, aspiração afogada.\nEntrega: 75 dias após o pedido. Pagamento 28 DDF. IPI zero, ICMS 7%. Embalagem inclusa. Validade 30 dias (até ~18/12/2026). Garantia 12 meses da instalação ou 18 meses da entrega.\nATENÇÃO: frete CIF cotado 'posto Araguaína/TO' – confirmar destino Luziânia-GO.",
+   "materiais": [
+    {
+     "desc": "Bomba helicoidal NEMO NM063BY04S24B com motorredutor SEW 11 kW e base",
+     "cod": "850007065",
+     "qtd": 1.0,
+     "un": "CJ",
+     "sit": "A solicitar"
+    }
+   ],
+   "bombas": [
+    "Bomba Extração 1º Efeito Tropical"
+   ],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533435876"
   },
   {
