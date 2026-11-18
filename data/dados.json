@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-18T17:32:26+00:00",
+ "gerado": "2026-11-18T17:33:15+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -793,7 +793,10 @@
      "pag": "21 DDL",
      "analise": "Em análise",
      "obs": "Preço vinculado ao dólar (PTAX 5,78) e ao inox. Impostos inclusos. Sem montagem/instalação. Garantia 12 meses.",
-     "arquivo": null
+     "arquivo": {
+      "nome": "2839WA_Rev.0_GOIAS VERDE_BOMBA SANITARIA.pdf",
+      "url": "data/arquivos/13533429264/3397026526-2839WA_Rev.0_GOIAS-VERDE_BOMBA-SANITARIA.pdf"
+     }
     },
     {
      "nome": "Cotação Bombinox – Bomba BL80/32 inox 316L, 20 HP",
@@ -806,7 +809,10 @@
      "pag": "4x R$ 8.412,50 (16/12/26 a 10/03/27)",
      "analise": "Em análise",
      "obs": "BL80/32 20HP 2P, 316L, SMS 2.1/2 x 2, rotor semiaberto 170 mm, selo SiC x SiC Viton, NR-12. Suco de tomate até 90 °C, 50.000 L/h a 50 mca. IPI 0%, ICMS 7%. Frete FOB via Rodonaves. Validade de 10 dias (a partir de 18/11). Pagamento mediante aprovação de cadastro. Contato: Nilda, (48) 99979-6933.",
-     "arquivo": null
+     "arquivo": {
+      "nome": "GOIAS VERDE ALIMENTOS ORÇ 106303 (1).pdf",
+      "url": "data/arquivos/13533429264/3397026406-GOIAS-VERDE-ALIMENTOS-ORC-106303-1.pdf"
+     }
     }
    ],
    "bombas": [],
