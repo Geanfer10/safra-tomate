@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-18T17:27:50+00:00",
+ "gerado": "2026-11-18T17:28:30+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -772,6 +772,20 @@
      "qtd": 1.0,
      "un": "UN",
      "sit": "A solicitar"
+    },
+    {
+     "desc": "Cotação Inoxnew – Bomba sanitária NG-03 inox 316, 20 HP",
+     "cod": "",
+     "qtd": null,
+     "un": "",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Cotação Bombinox – Bomba BL80/32 inox 316L, 20 HP",
+     "cod": "",
+     "qtd": null,
+     "un": "",
+     "sit": "A solicitar"
     }
    ],
    "bombas": [],
@@ -816,6 +830,13 @@
      "cod": "850007065",
      "qtd": 1.0,
      "un": "CJ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Cotação NETZSCH – Bomba NEMO NM063BY04S24B completa",
+     "cod": "",
+     "qtd": null,
+     "un": "",
      "sit": "A solicitar"
     }
    ],
@@ -892,6 +913,13 @@
      "qtd": 2.0,
      "un": "UN",
      "sit": "A solicitar"
+    },
+    {
+     "desc": "Cotação Casa das Transmissões – Corrente 58 m + 12 engrenagens",
+     "cod": "",
+     "qtd": null,
+     "un": "",
+     "sit": "A solicitar"
     }
    ],
    "bombas": [],
@@ -943,6 +971,13 @@
      "cod": "36557",
      "qtd": 2.0,
      "un": "PÇ",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Cotação Mackven – Soprador CRE 05D + 2 rotores",
+     "cod": "",
+     "qtd": null,
+     "un": "",
      "sit": "A solicitar"
     }
    ],
