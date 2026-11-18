@@ -309,3 +309,25 @@ table.mat td.r{white-space:nowrap}
 /* Valores em reais por extenso cabem nos cartões */
 .kpi .v{font-size:clamp(18px,1.7vw,25px);overflow-wrap:anywhere}
 .cat-v{overflow-wrap:anywhere}
+
+/* Orçamento por cotações */
+.orc{display:inline-grid;justify-items:end;gap:2px}
+.orc b{font-weight:700;white-space:nowrap}
+.orc-tag{font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:1px 7px;border-radius:4px;background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold);white-space:nowrap}
+.orc-tag.ok{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+table.cot td{vertical-align:top}
+table.cot tr.cot-ok td{background:color-mix(in srgb,var(--ok) 7%,transparent)}
+table.cot tr.cot-rec td{opacity:.55}
+table.cot tr.cot-obs td{font-size:11.5px;color:var(--muted);padding-top:0;border-top:0}
+.cot-flag{display:inline-block;font-family:var(--f-body);font-size:10px;font-weight:700;padding:0 6px;border-radius:4px;margin-left:4px}
+.cot-flag.min{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.cot-flag.max{background:color-mix(in srgb,var(--bad) 13%,transparent);color:var(--bad)}
+.cot-an{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:4px;border:1px solid var(--line);white-space:nowrap}
+.cot-an[data-a="Aprovada"]{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+.cot-an[data-a="Recusada"]{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 40%,transparent)}
+.cot-an[data-a="Em análise"]{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 40%,transparent)}
+.cot-venc{color:var(--bad);font-weight:600}
+.cot-venc.perto{color:var(--warn)}
+.cot-arq{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;margin-top:3px;color:var(--brand)}
+.cot-res{font-size:12.5px;color:var(--muted);margin:-2px 0 8px}
+.cot-res b{color:var(--fg)}

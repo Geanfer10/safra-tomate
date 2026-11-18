@@ -43,13 +43,53 @@ const safras=()=>[...new Set(DADOS.map(d=>d.safra))].sort();
 
 // Indicadores clicáveis: cada um filtra a lista de atividades
 // "todas" fica fora dos cartões: é o estado padrão (sem filtro) da lista de atividades
+/* ---------- Orçamento: cotações (análise) ou valor manual ----------
+   Com cotações válidas (não recusadas): faixa menor–maior; com uma aprovada: o valor dela.
+   Sem cotações: o "Orçamento previsto" digitado no Monday. */
+function cotacoesHTML(d){
+  const C=(d.cotacoes||[]);if(!C.length)return "";
+  const val=C.filter(c=>c.valor!=null&&c.analise!=="Recusada").map(c=>c.valor);
+  const mn=val.length?Math.min(...val):null, mx=val.length?Math.max(...val):null;
+  const hoje=new Date();hoje.setHours(0,0,0,0);
+  const vali=v=>{if(!v)return"—";const n=Math.round((new Date(v+"T00:00")-hoje)/864e5);const t=dt(v);
+    return n<0?`<span class="cot-venc">${t} · vencida</span>`:n<=7?`<span class="cot-venc perto">${t} · ${n}d</span>`:t};
+  const ord={"Aprovada":0,"Em análise":1,"Recusada":2};
+  const rows=C.slice().sort((a,b)=>(ord[a.analise]??1)-(ord[b.analise]??1)||(a.valor??1e15)-(b.valor??1e15)).map(c=>{
+    const tag=c.analise!=="Recusada"&&val.length>1?(c.valor===mn?'<span class="cot-flag min">menor</span>':c.valor===mx?'<span class="cot-flag max">maior</span>':""):"";
+    return `<tr class="cot-${c.analise==="Aprovada"?"ok":c.analise==="Recusada"?"rec":"an"}">
+      <td><b>${esc(c.forn)||esc(c.nome)}</b>${c.prop?`<div class="muted">${esc(c.prop)}</div>`:""}${c.arquivo&&c.arquivo.url?`<a class="cot-arq" href="${esc(c.arquivo.url)}" target="_blank" rel="noopener noreferrer">${ico.doc}proposta</a>`:""}</td>
+      <td class="r num">${c.valor!=null?brl(c.valor):"—"} ${tag}</td>
+      <td>${esc(c.frete)||"—"}</td><td>${esc(c.prazo)||"—"}</td><td class="num">${vali(c.validade)}</td><td>${esc(c.pag)||"—"}</td>
+      <td><span class="cot-an" data-a="${esc(c.analise)}">${esc(c.analise)}</span></td></tr>
+      ${c.obs?`<tr class="cot-obs"><td colspan="7">${esc(c.obs)}</td></tr>`:""}`}).join("");
+  const dif=val.length>1?`<div class="cot-res">Diferença entre a maior e a menor: <b class="num">${brl(mx-mn)}</b> (${((mx-mn)/mn*100).toFixed(1).replace(".",",")}%)</div>`:"";
+  return `<div class="gv-sec"><h3>${ico.clip} Cotações · ${C.length}</h3>${dif}<div class="mat-wrap"><table class="mat cot"><thead><tr><th>Fornecedor</th><th class="r">Valor</th><th>Frete</th><th>Prazo</th><th>Validade</th><th>Pagamento</th><th>Análise</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+}
+function prepOrc(d){
+  const cots=(d.cotacoes||[]).filter(c=>c.valor!=null&&c.analise!=="Recusada");
+  const apr=cots.find(c=>c.analise==="Aprovada");
+  if(apr){d.pMin=d.pMax=apr.valor;d.orcTipo="aprovado";d.orcN=cots.length}
+  else if(cots.length){const v=cots.map(c=>c.valor);d.pMin=Math.min(...v);d.pMax=Math.max(...v);d.orcTipo="cotado";d.orcN=cots.length}
+  else if(d.prev>0){d.pMin=d.pMax=d.prev;d.orcTipo="manual";d.orcN=0}
+  else{d.pMin=d.pMax=0;d.orcTipo=null;d.orcN=0}
+  return d;
+}
+const prep=l=>(l||[]).map(prepOrc);
+const faixaR=(a,b)=>!a&&!b?"—":Math.round(a*100)===Math.round(b*100)?brl(a):`${brl(a)} – ${brl(b)}`;
+const sMin=l=>sum(l,d=>d.pMin), sMax=l=>sum(l,d=>d.pMax);
+function celOrc(d){
+  if(!d.orcTipo)return "—";
+  if(d.orcTipo==="aprovado")return `<div class="orc"><span class="orc-tag ok">Aprovado</span><b class="num">${brl(d.pMin)}</b></div>`;
+  if(d.orcTipo==="cotado")return `<div class="orc"><span class="orc-tag">Orçado · ${d.orcN} cotaç${d.orcN>1?"ões":"ão"}</span><b class="num">${faixaR(d.pMin,d.pMax)}</b></div>`;
+  return `<span class="num">${brl(d.pMin)}</span>`;
+}
 const KPI_TODAS={id:"todas",l:"Atividades",k:"--brand",f:()=>true};
 const KPIS=[
  {id:"atrasadas",l:"Atrasadas",k:"--bad",f:d=>efetivo(d)==="Atrasado"},
  {id:"prioridade",l:"Prioridade alta",k:"--tomato",f:d=>ehPrio(d)&&aberta(d)},
  {id:"andamento",l:"Em andamento",k:"--warn",f:d=>d.status==="Em andamento"||d.status==="Aguardando material"},
  {id:"concluidas",l:"Concluídas",k:"--ok",f:d=>d.status==="Concluído"},
- {id:"orcamento",l:"Orçamento",k:"--gold",f:d=>(d.prev||0)>0}
+ {id:"orcamento",l:"Orçamento",k:"--gold",f:d=>(d.pMax||0)>0}
 ];
 const kpiDe=id=>KPIS.find(k=>k.id===id)||KPI_TODAS;
 
@@ -72,11 +112,11 @@ function render(){
   document.getElementById("secDeps").hidden=!!st.dept;
   const ban=document.getElementById("depBanner");ban.hidden=!st.dept;
   if(st.dept){
-    const c=DEPTS[st.dept], tot=sum(LS,d=>d.prev)||0, p=sum(L,d=>d.prev), r=sum(L,d=>d.real);
+    const c=DEPTS[st.dept], tot=sMax(LS)||0, p=sMax(L), r=sum(L,d=>d.real);
     ban.style.setProperty("--c",`var(${c})`);
     document.getElementById("dbNome").textContent=st.dept;
     document.getElementById("dbSafra").textContent=st.safra;
-    document.getElementById("dbResumo").innerHTML=`<span>Atividades<b>${L.length}</b></span><span>Previsto<b>${brl(p)}</b></span><span>Realizado<b>${brl(r)}</b></span><span>Fatia do orçamento<b>${tot?(p/tot*100).toFixed(0):0}%</b></span>`;
+    document.getElementById("dbResumo").innerHTML=`<span>Atividades<b>${L.length}</b></span><span>Orçado<b>${faixaR(sMin(L),sMax(L))}</b></span><span>Realizado<b>${brl(r)}</b></span><span>Fatia do orçamento<b>${tot?(p/tot*100).toFixed(0):0}%</b></span>`;
   }
 }
 
@@ -85,7 +125,7 @@ function categorias(B){
   const tipos=[...new Set([...Object.keys(TIPO_COR),...B.map(d=>d.tipo).filter(Boolean)])];
   const card=(id,nome,lst,cor)=>`<button type="button" class="cat" data-tipo="${esc(id)}" aria-pressed="${st.tipo===id}" style="--k:var(${cor})">
     <span class="cat-n">${esc(nome)}</span><span class="cat-v num">${lst.length}</span>
-    <span class="cat-d">${lst.filter(aberta).length} em aberto · ${mil(sum(lst,d=>d.prev))}</span></button>`;
+    <span class="cat-d">${lst.filter(aberta).length} em aberto · ${faixaR(sMin(lst),sMax(lst))}</span></button>`;
   document.getElementById("cats").innerHTML=card("","Todas",B,"--fg")+tipos.map(t=>card(t,t,B.filter(d=>d.tipo===t),TIPO_COR[t]||"--gray")).join("");
   document.getElementById("fTipo").innerHTML=`<option value="">Todas as categorias (${B.length})</option>`+tipos.map(t=>`<option value="${esc(t)}"${st.tipo===t?" selected":""}>${esc(t)} (${B.filter(d=>d.tipo===t).length})</option>`).join("");
 }
@@ -103,7 +143,7 @@ function faixa(L){
 }
 
 function kpis(L){
-  const prev=sum(L,d=>d.prev), real=sum(L,d=>d.real), fech=L.filter(d=>d.real!=null), prevF=sum(fech,d=>d.prev);
+  const prev=sMax(L), real=sum(L,d=>d.real), fech=L.filter(d=>d.real!=null), prevF=sMax(fech), nCot=L.filter(d=>d.orcTipo==="cotado").length;
   const conc=L.filter(kpiDe("concluidas").f).length, tot=L.length||1;
   const info={
     todas:[L.length,st.dept?`de ${st.dept} na safra ${st.safra}`:`${Object.keys(DEPTS).filter(n=>L.some(d=>d.dept===n)).length} departamentos envolvidos`,null],
@@ -111,7 +151,7 @@ function kpis(L){
     andamento:[L.filter(kpiDe("andamento").f).length,"inclui aguardando material",null],
     atrasadas:[L.filter(kpiDe("atrasadas").f).length,"prazo vencido sem conclusão",null],
     prioridade:[L.filter(kpiDe("prioridade").f).length,`${L.filter(d=>d.prioridade==="Crítica"&&aberta(d)).length} críticas em aberto`,null],
-    orcamento:[mil(prev),fech.length?`realizado ${mil(real)} · ${prevF?((real/prevF)*100).toFixed(0):0}% do previsto fechado`:"nenhum item fechado ainda",prev?Math.min(1,real/prev):0]
+    orcamento:[faixaR(sMin(L),sMax(L)),(nCot?`${nCot} ite${nCot>1?"ns":"m"} com cotações em análise · `:"")+(fech.length?`realizado ${brl(real)}`:"nenhum item fechado ainda"),prev?Math.min(1,real/prev):0]
   };
   document.getElementById("kpis").innerHTML=KPIS.map(k=>{const [v,d,bar]=info[k.id];
     return `<button type="button" class="kpi" style="--k:var(${k.k})" data-kpi="${k.id}" aria-pressed="${st.kpi===k.id}">
@@ -122,10 +162,10 @@ function kpis(L){
 
 const gid=n=>"g-"+Object.keys(DEPTS).indexOf(n);
 function depts(L){
-  const tot=sum(L,d=>d.prev)||1;
-  document.getElementById("dsub").textContent="Safra "+st.safra+" · "+mil(sum(L,d=>d.prev))+" previstos no total";
+  const tot=sMax(L)||1;
+  document.getElementById("dsub").textContent="Safra "+st.safra+" · orçado "+faixaR(sMin(L),sMax(L));
   document.getElementById("dcards").innerHTML=Object.entries(DEPTS).map(([n,c])=>{
-    const D=L.filter(d=>d.dept===n), p=sum(D,d=>d.prev), r=sum(D,d=>d.real), cc=D.filter(d=>d.status==="Concluído").length;
+    const D=L.filter(d=>d.dept===n), p=sMax(D), pm=sMin(D), r=sum(D,d=>d.real), cc=D.filter(d=>d.status==="Concluído").length;
     const pr=D.filter(d=>ehPrio(d)&&aberta(d)).length, at=D.filter(d=>efetivo(d)==="Atrasado").length;
     const pct=D.length?cc/D.length*100:0;
     const al=(pr?`<span class="al crit">${pr} prioritária${pr>1?"s":""}</span>`:"")+(at?`<span class="al atr">${at} atrasada${at>1?"s":""}</span>`:"")+(!pr&&!at&&D.length?`<span class="al ok">Sem pendências críticas</span>`:"");
@@ -139,7 +179,7 @@ function depts(L){
       <span class="ir">Ver atividades de ${n} →</span></button>`}).join("");
 }
 
-const resumo=(l,s)=>({s,l,p:sum(l,d=>d.prev),r:sum(l,d=>d.real),n:l.length,c:l.filter(d=>d.status==="Concluído").length});
+const resumo=(l,s)=>({s,l,p:sMax(l),r:sum(l,d=>d.real),n:l.length,c:l.filter(d=>d.status==="Concluído").length});
 function historico(){
   const S=safras();
   document.getElementById("hist").innerHTML=linhasHist(S.map(s=>resumo(DADOS.filter(d=>d.safra===s),s)),false);
@@ -164,7 +204,7 @@ function linhasHist(V,comLista){
     const ordem={"Concluído":0,"Em andamento":1,"Aguardando material":2,"Não iniciado":3,"Cancelado":4};
     const lista=comLista?`<details class="lst"><summary>Ver ${v.n} atividade${v.n>1?"s":""} da safra ${v.s}</summary><ul>${v.l.slice().sort((a,b)=>(ordem[a.status]??9)-(ordem[b.status]??9)).map(d=>{const e=efetivo(d);
       return `<li><span><b>${esc(d.nome)}</b> · <span class="muted">${esc(d.area)}</span></span><span class="pill" style="--p:var(${STATUS_COR[e]||"--gray"})">${e}</span>
-      <span class="o num">${d.os?esc(d.os)+" · ":""}${d.nfe?esc(d.nfe)+" · ":""}Previsto ${d.prev?brl(d.prev):"—"} · Realizado ${brl(d.real)}${d.obs?` · ${esc(d.obs)}`:""}</span></li>`}).join("")}</ul></details>`:"";
+      <span class="o num">${d.os?esc(d.os)+" · ":""}${d.nfe?esc(d.nfe)+" · ":""}Orçado ${faixaR(d.pMin,d.pMax)} · Realizado ${brl(d.real)}${d.obs?` · ${esc(d.obs)}`:""}</span></li>`}).join("")}</ul></details>`:"";
     const bVar=varPrev==null?`<span class="badge neu">1ª safra registrada</span>`:`<span class="badge ${varPrev>0?"up":"down"}">${varPrev>0?"+":""}${varPrev.toFixed(0)}% vs ${ant.s}</span>`;
     const bDes=desvio==null?"":`<span class="badge ${desvio>0?"up":"down"}">${desvio>0?"+":""}${desvio.toFixed(1)}% desvio</span>`;
     return `<div class="hrow ${v.s===st.safra?"sel":""}">
@@ -201,13 +241,13 @@ function tabela(L){
     <td><span class="pill" style="--p:var(${STATUS_COR[e]||"--gray"})">${e}</span></td>
     <td>${esc(d.compra)}</td>
     <td><div class="docs">${docs||'<span class="muted">—</span>'}</div></td>
-    <td class="r num">${d.prev?brl(d.prev):"—"}</td><td class="r num">${brl(d.real)}</td></tr>`};
+    <td class="r">${celOrc(d)}</td><td class="r num">${brl(d.real)}</td></tr>`};
   document.getElementById("grupos").innerHTML=Object.entries(DEPTS).filter(([n])=>!st.dept||n===st.dept).map(([n,c])=>{
     const D=L.filter(d=>d.dept===n), rows=todas.filter(d=>d.dept===n).sort(ord);
     const cc=D.filter(d=>d.status==="Concluído").length;
     return `<div class="grupo ${rows.length?"":"vazio-g"}" id="${gid(n)}" style="--c:var(${c})">
       <div class="grupo-h"><h3>${n}<small>${rows.length} de ${D.length} atividades</small></h3>
-        <div class="tot"><span>Concluídas <b>${cc}/${D.length}</b></span><span>Previsto <b>${brl(sum(D,d=>d.prev))}</b></span><span>Realizado <b>${brl(sum(D,d=>d.real))}</b></span></div></div>
+        <div class="tot"><span>Concluídas <b>${cc}/${D.length}</b></span><span>Orçado <b>${faixaR(sMin(D),sMax(D))}</b></span><span>Realizado <b>${brl(sum(D,d=>d.real))}</b></span></div></div>
       ${rows.length?"":`<div class="sem">Nenhuma atividade de ${n} neste filtro.</div>`}
       <div class="tbl"><table>
         <thead><tr><th>Atividade</th><th>Equipamento / Área</th><th>Tipo</th><th>Prazo</th><th>Status</th><th>Compra</th><th>OS · NF-e · Anexos</th><th class="r">Previsto</th><th class="r">Realizado</th></tr></thead>
@@ -236,12 +276,13 @@ function abrir(id){
       ${campo("Tipo",esc(d.tipo))}
       ${campo("Prazo",d.ini?`${dt(d.ini)} → ${dt(d.fim)}`:"",1)}
       ${campo("Status da compra",esc(d.compra))}
-      ${campo("Previsto",d.prev?brl(d.prev):"",1)}
+      ${campo(d.orcTipo==="cotado"?"Orçado (faixa das cotações)":d.orcTipo==="aprovado"?"Orçado (cotação aprovada)":"Previsto",d.orcTipo?faixaR(d.pMin,d.pMax):"",1)}
       ${campo("Realizado",d.real!=null?brl(d.real):"",1)}
     </div>
     <div class="gv-sec"><h3>${ico.foto} Fotos do local</h3>${fotos.length?`<div class="fotos">${fotos.map((f,i)=>`<figure><button type="button" class="foto-btn" data-zoom="${i}" aria-label="Ampliar foto ${esc(f.nome)}"><img src="${esc(f.url)}" alt="${esc(f.nome)}" loading="lazy"></button><figcaption>${esc(f.nome)}</figcaption></figure>`).join("")}</div>`:`<div class="sem-arq">Nenhuma foto anexada no Monday.</div>`}</div>
     <div class="gv-sec"><h3>${ico.clip} Orçamentos</h3>${orc.length?`<ul class="arqs">${orc.map(arq).join("")}</ul>`:`<div class="sem-arq">Nenhum orçamento anexado.</div>`}</div>
     <div class="gv-sec"><h3>${ico.doc} NF-e</h3>${d.nfeArq?`<ul class="arqs">${arq(d.nfeArq)}</ul>`:`<div class="sem-arq">${d.nfe?"Número informado, arquivo não anexado.":"Sem nota fiscal vinculada."}</div>`}</div>
+    ${cotacoesHTML(d)}
     <div class="gv-sec"><h3>${ico.caixa} Materiais</h3>${(d.materiais||[]).length?`<div class="mat-wrap"><table class="mat"><thead><tr><th>Código</th><th>Descrição</th><th class="r">Qtd.</th><th>Situação</th></tr></thead><tbody>${d.materiais.map(m=>`<tr><td class="num">${esc(m.cod)||"—"}</td><td>${esc(m.desc)}</td><td class="r num">${m.qtd!=null?m.qtd.toLocaleString("pt-BR"):"—"} ${esc(m.un)}</td><td>${m.sit?`<span class="mat-sit" data-s="${esc(m.sit)}">${esc(m.sit)}</span>`:"—"}</td></tr>`).join("")}</tbody></table></div>`:`<div class="sem-arq">Nenhum material listado no Monday.</div>`}</div>
     ${d.obs?`<div class="gv-sec"><h3>Observações / lições aprendidas</h3><p style="margin:0">${esc(d.obs)}</p></div>`:""}
     ${d.url?`<a class="btn-monday" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Abrir no Monday</a>`:""}`;
@@ -337,14 +378,14 @@ async function carregar(){
   if(r&&r.ok){
     try{
       const dados=await r.json();
-      DADOS=Array.isArray(dados.itens)?dados.itens:[];
+      DADOS=prep(Array.isArray(dados.itens)?dados.itens:[]);
       const quando=dados.gerado?new Date(dados.gerado).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}):"";
       document.getElementById("fonteSub").textContent="Atualizado em "+quando;
       document.getElementById("rodapeFonte").textContent=`Fonte: quadro “Safra de Tomate – Preparação e Investimentos” (Monday) · atualizado em ${quando}.`;
       iniciar();return;
     }catch(e){}
   }
-  DADOS=EXEMPLO;
+  DADOS=prep(EXEMPLO);
   document.getElementById("fonteSub").textContent="Dados de exemplo (automação ainda não rodou)";
   document.getElementById("rodapeFonte").textContent="Exibindo dados de EXEMPLO. Os dados reais aparecem depois da primeira execução da automação.";
   iniciar();

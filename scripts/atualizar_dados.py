@@ -46,6 +46,20 @@ EXT_FOTO = {"jpg", "jpeg", "png", "webp", "gif", "bmp"}
 EXT_DOC = {"pdf", "xml", "xlsx", "xls", "csv", "docx", "doc", "txt", "jpg", "jpeg", "png"}
 
 # IDs das colunas dos subelementos (materiais de cada atividade)
+COL_COT = {
+    "tipo": "color_mm97d1rg",
+    "forn": "text_mm97nssj",
+    "prop": "text_mm9753b8",
+    "valor": "numeric_mm978006",
+    "frete": "color_mm974f7d",
+    "prazo": "text_mm979qt8",
+    "validade": "date_mm971j81",
+    "pag": "text_mm97vh33",
+    "analise": "color_mm97p6eg",
+    "obs": "long_text_mm97s1j5",
+    "arq": "file_mm97rc00",
+}
+
 COL_MAT = {
     "cod": "text_mm95jyxv",
     "qtd": "numeric_mm95mtzq",
@@ -103,7 +117,7 @@ CAMPOS_ITEM = """
   group { title }
   column_values { id text value ... on BoardRelationValue { display_value } }
   assets { id name public_url file_extension }
-  subitems { id name column_values { id text } }
+  subitems { id name column_values { id text value } assets { id name public_url file_extension } }
 """
 
 
@@ -198,10 +212,16 @@ def salvar_anexos(cv, item, destino, tipo, usados):
     return saida
 
 
+def eh_cotacao(sub):
+    return any(c["id"] == COL_COT["tipo"] and (c.get("text") or "") == "Cotação" for c in sub.get("column_values", []))
+
+
 def materiais(item):
-    """Subelementos da atividade: descrição, código, quantidade, unidade e situação."""
+    """Subelementos do tipo Material: descrição, código, quantidade, unidade e situação."""
     saida = []
     for sub in item.get("subitems") or []:
+        if eh_cotacao(sub):
+            continue
         cv = {c["id"]: (c.get("text") or "") for c in sub.get("column_values", [])}
         saida.append({
             "desc": sub.get("name") or "",
@@ -209,6 +229,31 @@ def materiais(item):
             "qtd": numero(cv.get(COL_MAT["qtd"])),
             "un": cv.get(COL_MAT["un"], ""),
             "sit": cv.get(COL_MAT["sit"], ""),
+        })
+    return saida
+
+
+def cotacoes(item, destino):
+    """Subelementos do tipo Cotação: propostas de fornecedores para análise."""
+    saida = []
+    for sub in item.get("subitems") or []:
+        if not eh_cotacao(sub):
+            continue
+        cvf = {c["id"]: c for c in sub.get("column_values", [])}
+        t = lambda k: (cvf.get(COL_COT[k]) or {}).get("text") or ""
+        arqs = salvar_anexos(cvf.get(COL_COT["arq"]), {"id": item["id"], "assets": sub.get("assets") or []}, destino, "doc", set())
+        saida.append({
+            "nome": sub.get("name") or "",
+            "forn": t("forn"),
+            "prop": t("prop"),
+            "valor": numero(t("valor")),
+            "frete": t("frete"),
+            "prazo": t("prazo"),
+            "validade": t("validade") or None,
+            "pag": t("pag"),
+            "analise": t("analise") or "Em análise",
+            "obs": t("obs"),
+            "arquivo": arqs[0] if arqs else None,
         })
     return saida
 
@@ -254,6 +299,7 @@ def converter(item, destino):
         "orcamentos": salvar_anexos(cv.get(COL["orcamentos"]), item, destino, "doc", usados),
         "obs": t("obs"),
         "materiais": materiais(item),
+        "cotacoes": cotacoes(item, destino),
         "bombas": [b.strip() for b in ((cv.get(COL["bomba"]) or {}).get("display_value") or "").split(",") if b.strip()],
         "url": url,
     }
