@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-18T17:33:15+00:00",
+ "gerado": "2026-11-18T17:36:04+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -851,15 +851,7 @@
     }
    ],
    "obs": "Orçar bomba nova da Netzsch para substituir a bomba de extração do concentrador Tropical.\n\nOferta NETZSCH OF-SN6287 Rev.00 de 18/11/2026 (Hender Soares, (62) 9 9151-6253, hender.soares@netzsch.com):\n- 1 bomba helicoidal NEMO NM063BY04S24B (CP ref. 850007065): R$ 68.550,00\n  Carcaça inox 304 com polimento interno, rotor AISI 304 UM80, estator Nemolast S66M, selo mecânico 8016218, sucção e recalque SMS 4\", horizontal.\n  Inclui motorredutor NETZSCH/SEW NS 87, 185 rpm, i=9,58, 11 kW, 4 polos, IE3, IP-55; base metálica tipo T; manual.\n  Condição de projeto: molho de tomate a 80 °C, 8,6 m³/h, 18 bar, aspiração afogada.\nEntrega: 75 dias após o pedido. Pagamento 28 DDF. IPI zero, ICMS 7%. Embalagem inclusa. Validade 30 dias (até ~18/12/2026). Garantia 12 meses da instalação ou 18 meses da entrega.\nATENÇÃO: frete CIF cotado 'posto Araguaína/TO' – confirmar destino Luziânia-GO.",
-   "materiais": [
-    {
-     "desc": "Bomba helicoidal NEMO NM063BY04S24B com motorredutor SEW 11 kW e base",
-     "cod": "850007065",
-     "qtd": 1.0,
-     "un": "CJ",
-     "sit": "A solicitar"
-    }
-   ],
+   "materiais": [],
    "cotacoes": [
     {
      "nome": "Cotação NETZSCH – Bomba NEMO NM063BY04S24B completa",
@@ -1001,22 +993,7 @@
     }
    ],
    "obs": "Proposta Mackven LK-00800/2026 de 16/11/2026:\n- 1 soprador CRE 05D (8,3 m³/min, 11.000 mmca, 15 CV, IP-55, 220/380 V, 60 Hz): R$ 36.850,00\n- 2 rotores CRE 05D x R$ 3.800,00 = R$ 7.600,00\nTotal previsto: R$ 44.450,00 (IPI isento, ICMS incluso, frete não incluso – retirada em São Bernardo do Campo/SP).\nPagamento 30 DDL. Entrega 10 a 15 dias após o pedido. Garantia de 12 meses.",
-   "materiais": [
-    {
-     "desc": "39246 - COMPRESSOR RADIAL CRE05D MOTOR 15CV 2POLOS 220/380V 60HZ VAZAO 8,3M³ PRESSAO 11000MMCA",
-     "cod": "39246",
-     "qtd": 1.0,
-     "un": "UN",
-     "sit": "A solicitar"
-    },
-    {
-     "desc": "36557 -ROTOR COMPRESSOR RADIAL CRE 05D",
-     "cod": "36557",
-     "qtd": 2.0,
-     "un": "PÇ",
-     "sit": "A solicitar"
-    }
-   ],
+   "materiais": [],
    "cotacoes": [
     {
      "nome": "Cotação Mackven – Soprador CRE 05D + 2 rotores",
