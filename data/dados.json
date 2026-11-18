@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-18T14:39:37+00:00",
+ "gerado": "2026-11-18T14:40:17+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -758,7 +758,12 @@
      "url": "data/arquivos/13533429264/3383482397-WhatsApp-Image-2026-11-11-at-11.43.00.jpg"
     }
    ],
-   "orcamentos": [],
+   "orcamentos": [
+    {
+     "nome": "2839WA_Rev.0_GOIAS VERDE_BOMBA SANITARIA.pdf",
+     "url": "data/arquivos/13533429264/3396471727-2839WA_Rev.0_GOIAS-VERDE_BOMBA-SANITARIA.pdf"
+    }
+   ],
    "obs": "Orçar bomba igual à existente no BL do tanque de suco, conforme os dados da plaqueta.\n\nProposta Inoxnew nº 2.839WA Rev.0 de 18/11/2026 (vendedora Wilka Araújo, (62) 3280-0240, wilkaaraujo@inoxnew.com.br):\n- 1 bomba centrífuga sanitária NG-03 (cód. 1222): R$ 36.720,00\n  Carcaça e rotor inox 316, monobloco, vertical; rotor Ø 170 mm; selo mecânico simples 1/8\" SiC x SiC Viton; anéis EPDM; sucção 2.1/2\" SMS x recalque 2\" SMS; motor WEG 20 HP 3.500 rpm 220/380 V 60 Hz IP55; capa inox com proteção NR-12.\nImpostos inclusos (ICMS e IPI). Frete FOB. Pagamento 21 DDL. Entrega: final de janeiro. Validade: 16/12/2026.\nPreço vinculado ao dólar (PTAX 5,78) e sujeito a reajuste de aço inox. Não inclui montagem, instalação elétrica nem transporte. Garantia de 12 meses do início de operação ou 18 meses da NF.",
    "materiais": [
     {
