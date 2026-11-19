@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-19T15:10:34+00:00",
+ "gerado": "2026-11-19T15:11:13+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -1165,7 +1165,64 @@
    ],
    "orcamentos": [],
    "obs": "Procurar o Elenilton para verificar o material. Parede do tubo recomendada: 2 mm.",
-   "materiais": [],
+   "materiais": [
+    {
+     "desc": "Tubo A/I 304 pipe 10\" x 2 mm — 3 barras de 6 m",
+     "cod": "33905",
+     "qtd": 18.0,
+     "un": "M",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Caps A/I 304 pipe 10\" x 2 mm",
+     "cod": "A cadastrar",
+     "qtd": 2.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Tubo A/I 304 pipe 8\" x 2 mm — 13 barras de 6 m",
+     "cod": "48301",
+     "qtd": 78.0,
+     "un": "M",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Curva A/I 304 90° pipe 8\" x 2 mm",
+     "cod": "48291",
+     "qtd": 10.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Curva A/I 304 45° pipe 8\" x 2 mm",
+     "cod": "A cadastrar",
+     "qtd": 7.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Válvula borboleta EPDM, disco A/I, 8\"",
+     "cod": "45220",
+     "qtd": 4.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Pestana A/I 304 8\" x 2 mm",
+     "cod": "48288",
+     "qtd": 12.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Redução A/I 304 pipe 8\" x 6\" x 2 mm",
+     "cod": "A cadastrar",
+     "qtd": 1.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    }
+   ],
    "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533451844"
