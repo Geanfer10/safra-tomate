@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-19T19:20:23+00:00",
+ "gerado": "2026-11-19T19:23:30+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -1233,21 +1233,7 @@
      "sit": "A solicitar"
     }
    ],
-   "cotacoes": [
-    {
-     "nome": "Cotação Prime Metais – orç. 000422 (parcial: 5 de 7 itens)",
-     "forn": "Prime Metais Tubos e Conexões (Goiânia-GO)",
-     "prop": "000422",
-     "valor": 33511.92,
-     "frete": "",
-     "prazo": "",
-     "validade": null,
-     "pag": "30 dias",
-     "analise": "Em análise",
-     "obs": "Orçamento 000422 de 19/11/2026. Cotado: tubo OD inox 304L 6\" x 2 mm – 60 m x R$ 413,43 = R$ 24.805,89; curva 90° inox 304 6\" – 7 un = R$ 2.265,15; redução conc. 6\" x 4\" – 3 un = R$ 511,30; união SMS 6\" EPDM – 4 un = R$ 2.533,62; chapa xadrez A/C 3,00 x 1200 x 3000 – 3 un = R$ 3.209,31. Subtotal R$ 33.325,27 + IPI 3,25% R$ 186,65 = R$ 33.511,92. NÃO cotados: curva 45° 6\" e viga U 4\". Obs.: tubo cotado em 304L (lista pede 304).",
-     "arquivo": null
-    }
-   ],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533427161"
   },
@@ -1344,21 +1330,7 @@
      "sit": "A solicitar"
     }
    ],
-   "cotacoes": [
-    {
-     "nome": "Cotação Prime Metais – orç. 000422 (parcial: 1 de 9 itens)",
-     "forn": "Prime Metais Tubos e Conexões (Goiânia-GO)",
-     "prop": "000422",
-     "valor": 7073.67,
-     "frete": "",
-     "prazo": "",
-     "validade": null,
-     "pag": "30 dias",
-     "analise": "Em análise",
-     "obs": "Orçamento 000422 de 19/11/2026 (vendedora Ana Clara, (62) 99197-8232). Cotado: curva 90° inox 304 8\" x 2,0 mm pipe – 10 un x R$ 707,37 = R$ 7.073,67. Tubo 3\" x 2 mm (24 m) veio SEM PREÇO (R$ 0,00). NÃO cotados: tubo 10\", caps 10\", tubo 8\", curva 45° 8\", válvula borboleta 8\", pestana 8\", redução 8\"x6\". Valores já com desconto; IPI 0%.",
-     "arquivo": null
-    }
-   ],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533451844"
   }
