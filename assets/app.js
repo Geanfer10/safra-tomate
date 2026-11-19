@@ -68,8 +68,10 @@ function cotacoesHTML(d){
 function prepOrc(d){
   const cots=(d.cotacoes||[]).filter(c=>c.valor!=null&&c.analise!=="Recusada");
   const apr=cots.find(c=>c.analise==="Aprovada");
+  const mats=d.materiais||[], matP=mats.filter(m=>m.vtot>0);
   if(apr){d.pMin=d.pMax=apr.valor;d.orcTipo="aprovado";d.orcN=cots.length}
   else if(cots.length){const v=cots.map(c=>c.valor);d.pMin=Math.min(...v);d.pMax=Math.max(...v);d.orcTipo="cotado";d.orcN=cots.length}
+  else if(matP.length){const t=matP.reduce((a,m)=>a+m.vtot,0);d.pMin=d.pMax=t;d.orcTipo="materiais";d.orcN=matP.length;d.matN=mats.length}
   else if(d.prev>0){d.pMin=d.pMax=d.prev;d.orcTipo="manual";d.orcN=0}
   else{d.pMin=d.pMax=0;d.orcTipo=null;d.orcN=0}
   return d;
@@ -81,6 +83,7 @@ function celOrc(d){
   if(!d.orcTipo)return "—";
   if(d.orcTipo==="aprovado")return `<div class="orc"><span class="orc-tag ok">Aprovado</span><b class="num">${brl(d.pMin)}</b></div>`;
   if(d.orcTipo==="cotado")return `<div class="orc"><span class="orc-tag">Orçado · ${d.orcN} cotaç${d.orcN>1?"ões":"ão"}</span><b class="num">${faixaR(d.pMin,d.pMax)}</b></div>`;
+  if(d.orcTipo==="materiais")return `<div class="orc"><span class="orc-tag${d.orcN<d.matN?" parc":""}">Orçado · ${d.orcN} de ${d.matN} itens</span><b class="num">${brl(d.pMin)}</b></div>`;
   return `<span class="num">${brl(d.pMin)}</span>`;
 }
 const KPI_TODAS={id:"todas",l:"Atividades",k:"--brand",f:()=>true};
@@ -276,14 +279,14 @@ function abrir(id){
       ${campo("Tipo",esc(d.tipo))}
       ${campo("Prazo",d.ini?`${dt(d.ini)} → ${dt(d.fim)}`:"",1)}
       ${campo("Status da compra",esc(d.compra))}
-      ${campo(d.orcTipo==="cotado"?"Orçado (faixa das cotações)":d.orcTipo==="aprovado"?"Orçado (cotação aprovada)":"Previsto",d.orcTipo?faixaR(d.pMin,d.pMax):"",1)}
+      ${campo(d.orcTipo==="materiais"?`Orçado (soma de ${d.orcN} de ${d.matN} itens)`:d.orcTipo==="cotado"?"Orçado (faixa das cotações)":d.orcTipo==="aprovado"?"Orçado (cotação aprovada)":"Previsto",d.orcTipo?faixaR(d.pMin,d.pMax):"",1)}
       ${campo("Realizado",d.real!=null?brl(d.real):"",1)}
     </div>
     <div class="gv-sec"><h3>${ico.foto} Fotos do local</h3>${fotos.length?`<div class="fotos">${fotos.map((f,i)=>`<figure><button type="button" class="foto-btn" data-zoom="${i}" aria-label="Ampliar foto ${esc(f.nome)}"><img src="${esc(f.url)}" alt="${esc(f.nome)}" loading="lazy"></button><figcaption>${esc(f.nome)}</figcaption></figure>`).join("")}</div>`:`<div class="sem-arq">Nenhuma foto anexada no Monday.</div>`}</div>
     <div class="gv-sec"><h3>${ico.clip} Orçamentos</h3>${orc.length?`<ul class="arqs">${orc.map(arq).join("")}</ul>`:`<div class="sem-arq">Nenhum orçamento anexado.</div>`}</div>
     <div class="gv-sec"><h3>${ico.doc} NF-e</h3>${d.nfeArq?`<ul class="arqs">${arq(d.nfeArq)}</ul>`:`<div class="sem-arq">${d.nfe?"Número informado, arquivo não anexado.":"Sem nota fiscal vinculada."}</div>`}</div>
     ${cotacoesHTML(d)}
-    <div class="gv-sec"><h3>${ico.caixa} Materiais</h3>${(d.materiais||[]).length?`<div class="mat-wrap"><table class="mat"><thead><tr><th>Código</th><th>Descrição</th><th class="r">Qtd.</th><th>Situação</th></tr></thead><tbody>${d.materiais.map(m=>`<tr><td class="num">${esc(m.cod)||"—"}</td><td>${esc(m.desc)}</td><td class="r num">${m.qtd!=null?m.qtd.toLocaleString("pt-BR"):"—"} ${esc(m.un)}</td><td>${m.sit?`<span class="mat-sit" data-s="${esc(m.sit)}">${esc(m.sit)}</span>`:"—"}</td></tr>`).join("")}</tbody></table></div>`:`<div class="sem-arq">Nenhum material listado no Monday.</div>`}</div>
+    <div class="gv-sec"><h3>${ico.caixa} Materiais</h3>${(d.materiais||[]).length?`<div class="mat-wrap"><table class="mat"><thead><tr><th>Código</th><th>Descrição</th><th class="r">Qtd.</th><th class="r">Valor unit.</th><th class="r">Valor total</th><th>Fornecedor</th><th>Situação</th></tr></thead><tbody>${d.materiais.map(m=>`<tr${m.vtot>0?"":' class="sem-preco"'}><td class="num">${esc(m.cod)||"—"}</td><td>${esc(m.desc)}</td><td class="r num">${m.qtd!=null?m.qtd.toLocaleString("pt-BR"):"—"} ${esc(m.un)}</td><td class="r num">${m.vunit>0?brl(m.vunit):"—"}</td><td class="r num">${m.vtot>0?brl(m.vtot):'<span class="falta">Aguardando cotação</span>'}</td><td>${m.forn?esc(m.forn)+(m.prop?` <small>· ${esc(m.prop)}</small>`:""):"—"}</td><td>${m.sit?`<span class="mat-sit" data-s="${esc(m.sit)}">${esc(m.sit)}</span>`:"—"}</td></tr>`).join("")}</tbody>${d.materiais.some(m=>m.vtot>0)?`<tfoot><tr><td colspan="4">Total orçado · ${d.materiais.filter(m=>m.vtot>0).length} de ${d.materiais.length} itens</td><td class="r num">${brl(sum(d.materiais,m=>m.vtot||0))}</td><td colspan="2"></td></tr></tfoot>`:""}</table></div>`:`<div class="sem-arq">Nenhum material listado no Monday.</div>`}</div>
     ${d.obs?`<div class="gv-sec"><h3>Observações / lições aprendidas</h3><p style="margin:0">${esc(d.obs)}</p></div>`:""}
     ${d.url?`<a class="btn-monday" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Abrir no Monday</a>`:""}`;
   fotosAbertas=fotos;

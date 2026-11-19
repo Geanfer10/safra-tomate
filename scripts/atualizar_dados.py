@@ -65,6 +65,10 @@ COL_MAT = {
     "qtd": "numeric_mm95mtzq",
     "un": "dropdown_mm95rgfs",
     "sit": "color_mm95dx3x",
+    "vunit": "numeric_mm98ag3a",
+    "vtot": "numeric_mm98rrtm",
+    "forn": "text_mm97nssj",
+    "prop": "text_mm9753b8",
 }
 
 # IDs das colunas do quadro no Monday
@@ -229,6 +233,10 @@ def materiais(item):
             "qtd": numero(cv.get(COL_MAT["qtd"])),
             "un": cv.get(COL_MAT["un"], ""),
             "sit": cv.get(COL_MAT["sit"], ""),
+            "vunit": numero(cv.get(COL_MAT["vunit"])),
+            "vtot": numero(cv.get(COL_MAT["vtot"])),
+            "forn": cv.get(COL_MAT["forn"], ""),
+            "prop": cv.get(COL_MAT["prop"], ""),
         })
     return saida
 

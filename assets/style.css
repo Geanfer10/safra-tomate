@@ -331,3 +331,9 @@ table.cot tr.cot-obs td{font-size:11.5px;color:var(--muted);padding-top:0;border
 .cot-arq{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;margin-top:3px;color:var(--brand)}
 .cot-res{font-size:12.5px;color:var(--muted);margin:-2px 0 8px}
 .cot-res b{color:var(--fg)}
+
+/* Valores por material */
+.mat tr.sem-preco td{color:var(--muted,#6b7280)}
+.mat .falta{font-size:.78em;color:var(--warn,#b45309);font-style:italic}
+.mat tfoot td{font-weight:700;border-top:2px solid var(--line,#d1d5db);padding-top:8px}
+.orc-tag.parc{background:#fef3c7;color:#92400e}
