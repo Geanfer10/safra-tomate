@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-18T17:43:02+00:00",
+ "gerado": "2026-11-19T15:10:34+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -332,7 +332,7 @@
    "nome": "Levantamento de material para nova esteira de resíduo do hídrico",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Média",
    "tipo": "Serviço interno",
    "resp": "",
@@ -1109,7 +1109,7 @@
    "nome": "Substituir tubulação de saída da bomba da tremonha para 6\"",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Alta",
    "tipo": "Aquisição",
    "resp": "",
@@ -1142,7 +1142,7 @@
    "nome": "Trocar tubulação de água próxima às torres de resfriamento",
    "dept": "Mecânica",
    "safra": "2027",
-   "status": "Não iniciado",
+   "status": "Em andamento",
    "prioridade": "Média",
    "tipo": "Aquisição",
    "resp": "",
