@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-19T19:23:30+00:00",
+ "gerado": "2026-11-19T19:25:14+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -254,7 +254,11 @@
      "cod": "36495",
      "qtd": 20.0,
      "un": "M³",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [],
@@ -361,52 +365,58 @@
      "cod": "33781",
      "qtd": 72.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 79.41,
+     "vtot": 5717.56,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Barra chata A/I 304 1.1/2\" x 1/8\" — 13 barras de 6 m",
      "cod": "33841",
      "qtd": 78.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 35.77,
+     "vtot": 2789.94,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Corte de chapa A/I 304 300 x 350 x 8 mm",
      "cod": "A cadastrar",
      "qtd": 8.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 329.2,
+     "vtot": 2633.63,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Tubo retangular 40 x 20 A/I 304 x 2 mm — 3 barras de 6 m",
      "cod": "38239",
      "qtd": 18.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 63.88,
+     "vtot": 1149.87,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Chapa lisa A/I 304 1.200 x 3.000 x 1,5 mm",
      "cod": "33811",
      "qtd": 1.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 1687.47,
+     "vtot": 1687.47,
+     "forn": "Prime Metais",
+     "prop": "000422"
     }
    ],
-   "cotacoes": [
-    {
-     "nome": "Cotação Prime Metais – orç. 000422 (5 de 5 itens)",
-     "forn": "Prime Metais Tubos e Conexões (Goiânia-GO)",
-     "prop": "000422",
-     "valor": 13978.47,
-     "frete": "",
-     "prazo": "",
-     "validade": null,
-     "pag": "30 dias",
-     "analise": "Em análise",
-     "obs": "Orçamento 000422 de 19/11/2026. Cotado: cantoneira inox 304 2\" x 1/8\" – 72 m = R$ 5.537,59; barra chata inox 304 1.1/2\" x 1/8\" – 78 m = R$ 2.702,12; tubo ret. inox 304 40x20x2 – 18 m = R$ 1.149,87; chapa lisa inox 304 1,5 x 1250 x 3000 – 1 un = R$ 1.634,35; perfil inox 304 8 mm cortado 300x350 – 8 un = R$ 2.550,73. Subtotal R$ 13.574,66 + IPI 3,25% R$ 403,81 = R$ 13.978,47. Obs.: chapa lisa cotada com 1250 mm de largura (lista pede 1.200).",
-     "arquivo": null
-    }
-   ],
+   "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533393775"
   },
@@ -467,287 +477,451 @@
      "cod": "36276",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "BUCHA DE ACOPLAMENTO CÓD. NDB4960637",
      "cod": "3449490",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "PINO CILÍNDRICO CÓD. NDB4825301",
      "cod": "36287",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "VEDAÇÃO SM CÓD. 883089",
      "cod": "36335",
      "qtd": 4.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "BUCHA DE ACOPLAMENTO CÓD. NDB4825304",
      "cod": "36241",
      "qtd": 6.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "EIXO ACIONAMENTO B NM090 S AISI304 NDB4825594",
      "cod": "47592",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ANEL-O CÓD. 516205",
      "cod": "36216",
      "qtd": 4.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "BUCHA NDB 4825307",
      "cod": "36240",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ESTATOR 157356",
      "cod": "36282",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "VEDACAO SM K NE100 873396 NETZSCH",
      "cod": "36336",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "43988 - FITA MAIOR ACO INOX 3/8X600MM 900140 NETZSCH",
      "cod": "43988",
      "qtd": 3.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "44008 - FITA MENOR ACO INOX 3/8X300MM 900137 NETZSCH",
      "cod": "44008",
      "qtd": 3.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ESTATOR NM053 02 S SBBPF STP3 - NDB4957096",
      "cod": "43976",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ROTOR B NM053 02S12 304 UM80 CROM - NDB4961091",
      "cod": "36319",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "PINO CIL/B NM053 AISI316 862155 NETZSCH",
      "cod": "36299",
      "qtd": 4.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "PINO CI NM053 B-P 304 NDB4978234 NETZSCH",
      "cod": "47628",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ANEL ORING 65,00X3,50MM PERBUNAN PB 70-80SH NDB517020 NETZSCH",
      "cod": "47631",
      "qtd": 8.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "EIXO LIGACAO B NM053 AISI304 NDB4825835 NETZSCH",
      "cod": "47651",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "VEDACAO SM B NE 40 SBE NDB877401 NETZSCH",
      "cod": "47632",
      "qtd": 4.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "SELO MECANICO MG1/055-G60 Q1Q1EGG 677391",
      "cod": "34344",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "EIXO DE ACOPLAMENTO CÓD. NDB4961623",
      "cod": "36259",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ESTATOR NM063 01L SBBPF/1020 NDB4956611 NETZSCH",
      "cod": "45806",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "PINO CI B NE50A AISI316 868663 NETZSCH",
      "cod": "36293",
      "qtd": 6.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "SELO MECANICO ME MG1/065-G60 Q1Q1EGG NMP5027027 NETZSCH",
      "cod": "34343",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ANEL ORING 70,00X3,50MM PERBUNAN PB 70-80SH NDB516327 NETZSCH",
      "cod": "36226",
      "qtd": 4.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "VEDACAO SM B NE 50 NDB876657 NETZSCH",
      "cod": "47646",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "NETZSCH 594034 ANEL ORING 58 X 20MM* (ERRADO)",
      "cod": "36224",
      "qtd": 8.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ANEL ORING 31,00X18,50MM PB 460113 NETZSCH",
      "cod": "36220",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "EIXO ACOPLAMENTO B NE50A AISI304 NDB4996050 NETZSCH",
      "cod": "36256",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ESTATOR 2NE50A SBE/1020 CODIGO 002588 NETZSCH",
      "cod": "36265",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ESTATOR NES50A SBE/1020 NDB4952624 NETZSCH",
      "cod": "43968",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "EIXO ACIONAMENTO NE50A AISI304 868648 NETZSCH",
      "cod": "36252",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ESTATOR NE69A SBE/1020 CODIGO 003793 NETZSCH",
      "cod": "36268",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "PINO CILINDRICO P/BOMBA COD.868662 NETZSCH",
      "cod": "36297",
      "qtd": 4.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ANEL ORING 42X14MM COD.517096 NETZSCH",
      "cod": "36222",
      "qtd": 4.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ROTOR B NE69A AISI304 UM90 NDB4956023 NETZSCH",
      "cod": "36312",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ANEL ORING 88X3,5MM PB COD.517018 NETZSCH",
      "cod": "36228",
      "qtd": 8.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ESTATOR 4NE50A SBE/1020 CODIGO 003516 NETZSCH",
      "cod": "36267",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "ROTOR B 4NE50A AISI304 UM-90 865768 NETZSCH",
      "cod": "36311",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "EIXO DE ACOPLAMENTO CÓD. 892624",
      "cod": "36254",
      "qtd": 1.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "VEDAÇÃO SM CÓD. NDB4971492",
      "cod": "36333",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [],
@@ -836,7 +1010,11 @@
      "cod": "",
      "qtd": 1.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [
@@ -915,7 +1093,11 @@
      "cod": "850007065",
      "qtd": 1.0,
      "un": "CJ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [
@@ -977,35 +1159,55 @@
      "cod": "33571",
      "qtd": 50.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "3049445 - ENGRENAGEM DUPLA ACO CARBONO ASA 60 PASSO 3/4 76 DENTES",
      "cod": "3049445",
      "qtd": 1.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "3049446 - ENGRENAGEM DUPLA ACO CARBONO ASA 60 PASSO 3/4 37 DENTES",
      "cod": "3049446",
      "qtd": 1.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "3049447 - ENGRENAGEM SIMPLES ACO CARBONO PASSO 2\" 21 DENTES",
      "cod": "3049447",
      "qtd": 8.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "3049448 - ENGRENAGEM SIMPLES ACO CARBONO PASSO 2\" 14 DENTES",
      "cod": "3049448",
      "qtd": 2.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [
@@ -1065,14 +1267,22 @@
      "cod": "",
      "qtd": 1.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Rotor para soprador CRE 05D",
      "cod": "",
      "qtd": 2.0,
      "un": "PÇ",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [
@@ -1188,49 +1398,77 @@
      "cod": "33881",
      "qtd": 60.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 413.43,
+     "vtot": 24805.89,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Curva A/I 304 90° pipe 6\" x 2 mm",
      "cod": "32172",
      "qtd": 7.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 323.59,
+     "vtot": 2265.15,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Curva A/I 304 45° pipe 6\" x 2 mm",
      "cod": "A cadastrar",
      "qtd": 8.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Redução A/I 304 pipe 6\" x 4\" x 2 mm",
      "cod": "A cadastrar",
      "qtd": 3.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 170.43,
+     "vtot": 511.3,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "União A/I 304 SMS 6\"",
      "cod": "32208",
      "qtd": 4.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 653.99,
+     "vtot": 2615.96,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Chapa piso A/C 1.200 x 3.000 x 1/8\"",
      "cod": "33835",
      "qtd": 3.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 1104.54,
+     "vtot": 3313.61,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Viga \"U\" 4\" x 1/4\" — 4 barras de 6 m",
      "cod": "33759",
      "qtd": 24.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [],
@@ -1271,63 +1509,99 @@
      "cod": "33905",
      "qtd": 18.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Caps A/I 304 pipe 10\" x 2 mm",
      "cod": "A cadastrar",
      "qtd": 2.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Tubo A/I 304 pipe 8\" x 2 mm — 13 barras de 6 m",
      "cod": "48301",
      "qtd": 78.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Curva A/I 304 90° pipe 8\" x 2 mm",
      "cod": "48291",
      "qtd": 10.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": 707.37,
+     "vtot": 7073.67,
+     "forn": "Prime Metais",
+     "prop": "000422"
     },
     {
      "desc": "Curva A/I 304 45° pipe 8\" x 2 mm",
      "cod": "A cadastrar",
      "qtd": 7.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Válvula borboleta EPDM, disco A/I, 8\"",
      "cod": "45220",
      "qtd": 4.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Pestana A/I 304 8\" x 2 mm",
      "cod": "48288",
      "qtd": 12.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Redução A/I 304 pipe 8\" x 6\" x 2 mm",
      "cod": "A cadastrar",
      "qtd": 1.0,
      "un": "UN",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     },
     {
      "desc": "Tubo A/I 304 pipe 3\" x 2 mm — 4 barras de 6 m",
      "cod": "46931",
      "qtd": 24.0,
      "un": "M",
-     "sit": "A solicitar"
+     "sit": "A solicitar",
+     "vunit": null,
+     "vtot": null,
+     "forn": "",
+     "prop": ""
     }
    ],
    "cotacoes": [],
