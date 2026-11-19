@@ -18,6 +18,7 @@
   <nav class="nav" aria-label="Seções">
     <div class="grp">Painel</div>
     <button type="button" id="tab-safra" data-aba="safra" aria-current="page"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Visão geral</button>
+    <button type="button" id="tab-mat" data-aba="mat" aria-current="false"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>Materiais e valores</button>
     <button type="button" id="tab-hist" data-aba="hist" aria-current="false"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>Histórico</button>
     <div class="grp">Departamentos</div>
     <button type="button" data-d="Mecânica" data-nav="Mecânica" aria-current="false"><span class="dot" style="--c:var(--mec)"></span>Mecânica<span class="cnt" data-cnt="Mecânica"></span></button>
@@ -78,6 +79,14 @@
     </div>
     <div class="grupos" id="grupos"></div>
   </section>
+  </div>
+
+  <div class="aba" id="aba-mat" role="region" aria-label="Materiais e valores" hidden>
+    <section><div class="kpis" id="matKpis"></div></section>
+    <section>
+      <div class="sec-h"><h2 id="matTit">Materiais por atividade</h2><div class="filtros" id="matFiltros"></div></div>
+      <div class="grupos" id="matGrupos"></div>
+    </section>
   </div>
 
   <div class="aba" id="aba-hist" role="region" aria-label="Histórico" hidden>

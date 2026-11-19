@@ -28,7 +28,7 @@ const EXTRAS={
 const EXEMPLO=EXEMPLO_BASE.map(d=>Object.assign({},d,EXTRAS[d.id]||{}));
 let DADOS=[];
 const HOJE=new Date(); HOJE.setHours(0,0,0,0);
-const st={safra:null,kpi:"todas",dept:null,foco:null,tipo:""};
+const st={safra:null,kpi:"todas",dept:null,foco:null,tipo:"",mf:"todos",md:""};
 // Valores sempre por extenso no padrão brasileiro: R$ 44.450,00
 const brl=v=>v==null?"—":Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:2,maximumFractionDigits:2});
 const mil=brl;
@@ -108,7 +108,7 @@ function render(){
   // Com uma safra só não há o que escolher: mostra só o rótulo; o seletor volta quando entrar a próxima safra
   sel.innerHTML=S.length>1?S.map(s=>`<button type="button" data-s="${s}" aria-pressed="${s===st.safra}">Safra ${s}</button>`).join(""):`<button type="button" aria-pressed="true" tabindex="-1" style="cursor:default">Safra ${st.safra}</button>`;
   document.querySelector(".lbl-mini").hidden=S.length<2;
-  faixa(L); kpis(L); depts(LS); historico(); tabela(L);
+  faixa(L); kpis(L); depts(LS); historico(); tabela(L); materiaisTela(LS0);
   // Contador de atividades em aberto por departamento no menu
   document.querySelectorAll("[data-cnt]").forEach(el=>{const n=LS.filter(d=>d.dept===el.dataset.cnt&&aberta(d)).length;el.textContent=n||""});
   // Visão geral × departamento
@@ -338,22 +338,62 @@ document.addEventListener("keydown",e=>{
   const tr=e.target.closest&&e.target.closest("tr[data-abre]");
   if(tr&&(e.key==="Enter"||e.key===" ")){e.preventDefault();abrir(tr.dataset.abre)}
 });
-document.addEventListener("click",e=>{const tr=e.target.closest("tr[data-abre]");if(tr)abrir(tr.dataset.abre)});
+document.addEventListener("click",e=>{const tr=e.target.closest("[data-abre]");if(tr)abrir(tr.dataset.abre)});
 const slug=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 // qual: "safra" (visão geral), "hist" (histórico) ou o nome de um departamento
 function aba(qual){
-  const dep=DEPTS[qual]?qual:null, painel=qual==="hist"?"hist":"safra";
+  const dep=DEPTS[qual]?qual:null, painel=qual==="hist"||qual==="mat"?qual:"safra";
   st.dept=dep;st.kpi="todas";
-  ["safra","hist"].forEach(a=>document.getElementById("aba-"+a).hidden=a!==painel);
-  document.getElementById("tab-safra").setAttribute("aria-current",qual==="safra"?"page":"false");
-  document.getElementById("tab-hist").setAttribute("aria-current",qual==="hist"?"page":"false");
+  ["safra","hist","mat"].forEach(a=>document.getElementById("aba-"+a).hidden=a!==painel);
+  ["safra","hist","mat"].forEach(a=>document.getElementById("tab-"+a).setAttribute("aria-current",qual===a?"page":"false"));
   document.querySelectorAll("[data-nav]").forEach(b=>b.setAttribute("aria-current",b.dataset.nav===dep?"page":"false"));
-  document.getElementById("crumbAba").textContent=qual==="hist"?"Histórico":dep||"Visão geral";
-  document.getElementById("pgTitulo").textContent=qual==="hist"?"Histórico entre safras":dep?`Atividades de ${dep}`:"Preparação da Safra de Tomate";
+  document.getElementById("crumbAba").textContent=qual==="hist"?"Histórico":qual==="mat"?"Materiais e valores":dep||"Visão geral";
+  document.getElementById("pgTitulo").textContent=qual==="hist"?"Histórico entre safras":qual==="mat"?"Materiais e valores orçados":dep?`Atividades de ${dep}`:"Preparação da Safra de Tomate";
   fecharMenu();
   if(st.safra)render();
   window.scrollTo({top:0,behavior:"smooth"});
-  try{history.replaceState(null,"","#"+(qual==="hist"?"historico":dep?slug(dep):"geral"))}catch(e){}
+  try{history.replaceState(null,"","#"+(qual==="hist"?"historico":qual==="mat"?"materiais":dep?slug(dep):"geral"))}catch(e){}
+}
+/* ---------- Materiais e valores: cada item com seu preço e o que falta cotar ---------- */
+function materiaisTela(LS){
+  const comMat=LS.filter(d=>(d.materiais||[]).length);
+  const cotA=d=>d.orcTipo==="cotado"||d.orcTipo==="aprovado";
+  const todos=comMat.flatMap(d=>d.materiais.map(m=>({...m,_a:d})));
+  const tem=m=>m.vtot>0, emC=(m,d)=>!tem(m)&&cotA(d), falta=(m,d)=>!tem(m)&&!cotA(d);
+  const nP=todos.filter(tem).length, nC=todos.filter(m=>emC(m,m._a)).length, nF=todos.length-nP-nC, tot=sum(todos,m=>m.vtot||0);
+  const atC=comMat.filter(cotA), cMin=sum(atC,d=>d.pMin), cMax=sum(atC,d=>d.pMax);
+  const ativOk=comMat.filter(d=>!d.materiais.some(m=>falta(m,d))).length;
+  const n=todos.length||1;
+  const card=(id,l,v,dd,k,frac)=>`<button type="button" class="kpi" style="--k:var(${k})" data-mf="${id}" aria-pressed="${st.mf===id}"><span class="l">${l}</span><span class="v num">${v}</span><span class="d">${dd}</span>${frac!=null?`<span class="mini"><span style="width:${Math.round(frac*100)}%"></span></span>`:""}</button>`;
+  document.getElementById("matKpis").innerHTML=
+    card("todos","Itens de material",todos.length,`em ${comMat.length} atividades · ${ativOk} sem pendência`,"--brand",null)+
+    card("preco","Com preço por item",nP,`${brl(tot)}`,"--ok",nP/n)+
+    card("cot","Em cotação de fornecedores",nC,atC.length?`${atC.length} atividades · ${faixaR(cMin,cMax)}`:"—","--ele",nC/n)+
+    card("falta","Faltando cotação",nF,`${Math.round(nF/n*100)}% dos itens`,"--warn",nF/n)+
+    `<div class="kpi tot" style="--k:var(--gold);cursor:default"><span class="l">Total orçado até agora</span><span class="v num">${brl(tot+cMin)}</span><span class="d">${cMax>cMin?`até ${brl(tot+cMax)} · `:""}itens com preço + cotações (menor–maior)</span></div>`;
+  const deps=Object.keys(DEPTS).filter(n=>comMat.some(d=>d.dept===n));
+  const nomes={todos:"Todos os itens",preco:"Com preço",cot:"Em cotação",falta:"Faltando cotação"};
+  document.getElementById("matFiltros").innerHTML=
+    Object.entries(nomes).map(([k,l])=>`<button type="button" class="chip${st.mf===k?" on":""}" data-mf="${k}" aria-pressed="${st.mf===k}">${l}</button>`).join("")+
+    (deps.length>1?deps.map(n=>`<button type="button" class="chip${st.md===n?" on":""}" data-md="${esc(n)}" aria-pressed="${st.md===n}"><span class="dot" style="--c:var(${DEPTS[n]})"></span>${esc(n)}</button>`).join(""):"");
+  const filtroM=st.mf==="preco"?(m=>tem(m)):st.mf==="cot"?emC:st.mf==="falta"?falta:()=>true;
+  const pend=d=>d.materiais.filter(m=>falta(m,d)).length/d.materiais.length;
+  const grupos=comMat.filter(d=>!st.md||d.dept===st.md).map(d=>({d,ms:d.materiais.filter(m=>filtroM(m,d))})).filter(g=>g.ms.length)
+    .sort((a,b)=>pend(b.d)-pend(a.d)||b.d.materiais.length-a.d.materiais.length);
+  document.getElementById("matTit").textContent=`${nomes[st.mf]} · ${grupos.reduce((a,g)=>a+g.ms.length,0)}`;
+  const el=document.getElementById("matGrupos");
+  if(!grupos.length){el.innerHTML=`<div class="sem-arq">${st.mf==="falta"?"Nenhum item faltando cotação.":"Nenhum material nesta seleção."}</div>`;return}
+  el.innerHTML=grupos.map(({d,ms})=>{
+    const M=d.materiais, p=M.filter(tem).length, f=M.filter(m=>falta(m,d)).length, t=sum(M,m=>m.vtot||0), c=cotA(d);
+    const selo=f===0?(c&&!p?`<span class="mat-st cot">Em cotação · ${d.orcN} proposta${d.orcN>1?"s":""}</span>`:`<span class="mat-st ok">Completo</span>`):`<span class="mat-st ${p?"parc":"zero"}">Faltam ${f} de ${M.length}</span>`;
+    const tt=c&&!p?`Faixa <b>${faixaR(d.pMin,d.pMax)}</b>`:`Total <b>${t?brl(t):"—"}</b>`;
+    const val=m=>tem(m)?brl(m.vtot):c?`<span class="emcot">Na cotação</span>`:'<span class="falta">Aguardando cotação</span>';
+    return `<div class="grupo mat-g" style="--c:var(${DEPTS[d.dept]||"--brand"})">
+      <div class="grupo-h"><h3><button type="button" class="lnk" data-abre="${esc(d.id)}" title="Abrir detalhes da atividade">${esc(d.nome)}</button><small>${esc(d.dept)}</small></h3>
+        <div class="tot">${selo}<span>${p} de ${M.length} com preço</span><span>${tt}</span></div></div>
+      <div class="tbl"><table class="mat"><thead><tr><th>Código</th><th>Descrição</th><th class="r">Qtd.</th><th class="r">Valor unit.</th><th class="r">Valor total</th><th>Fornecedor</th></tr></thead><tbody>
+      ${ms.map(m=>`<tr${tem(m)?"":' class="sem-preco"'}><td class="num">${esc(m.cod)||"—"}</td><td>${esc(m.desc)}</td><td class="r num">${m.qtd!=null?m.qtd.toLocaleString("pt-BR"):"—"} ${esc(m.un)}</td><td class="r num">${m.vunit>0?brl(m.vunit):"—"}</td><td class="r num">${val(m)}</td><td>${m.forn?esc(m.forn)+(m.prop?` <small>· ${esc(m.prop)}</small>`:""):c&&!tem(m)?`<small>ver ${d.orcN} cotaç${d.orcN>1?"ões":"ão"}</small>`:"—"}</td></tr>`).join("")}
+      </tbody></table></div></div>`}).join("");
 }
 function fecharMenu(){document.getElementById("side").classList.remove("open");document.querySelector(".scrim")?.remove()}
 document.getElementById("menuBtn").addEventListener("click",()=>{const s=document.getElementById("side");s.classList.add("open");const sc=document.createElement("div");sc.className="scrim";sc.onclick=fecharMenu;document.body.appendChild(sc)});
@@ -363,6 +403,8 @@ document.addEventListener("click",e=>{
   const ct=e.target.closest("[data-tipo]"); if(ct){st.tipo=st.tipo===ct.dataset.tipo?"":ct.dataset.tipo;render();return}
   const b=e.target.closest("button"); if(!b) return;
   if(b.dataset.aba){aba(b.dataset.aba);return}
+  if(b.dataset.mf){st.mf=b.dataset.mf;materiaisTela(DADOS.filter(d=>d.safra===st.safra));return}
+  if(b.dataset.md!==undefined){st.md=st.md===b.dataset.md?"":b.dataset.md;materiaisTela(DADOS.filter(d=>d.safra===st.safra));return}
   if(b.dataset.d){aba(b.dataset.d);return}
   if(b.dataset.s){st.safra=b.dataset.s;st.kpi="todas";render()}
   else if(b.dataset.kpi){st.kpi=st.kpi===b.dataset.kpi?"todas":b.dataset.kpi;render();if(st.kpi!=="todas")irLista()}
@@ -370,7 +412,7 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.limpa){e.preventDefault();e.target.click()}});
 
-function iniciar(){const s=safras(),ano=String(new Date().getFullYear()+1);st.safra=s.includes(ano)?ano:s[s.length-1];const h=location.hash.slice(1),dep=Object.keys(DEPTS).find(n=>slug(n)===h);aba(h==="historico"?"hist":dep||"safra")}
+function iniciar(){const s=safras(),ano=String(new Date().getFullYear()+1);st.safra=s.includes(ano)?ano:s[s.length-1];const h=location.hash.slice(1),dep=Object.keys(DEPTS).find(n=>slug(n)===h);aba(h==="historico"?"hist":h==="materiais"?"mat":dep||"safra")}
 /* ---------- Carregamento dos dados ----------
    A automação (GitHub Actions) lê o quadro do Monday e publica data/dados.json.
    Sem esse arquivo (antes da primeira execução), o painel mostra os exemplos. */
