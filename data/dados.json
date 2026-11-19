@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-19T15:11:13+00:00",
+ "gerado": "2026-11-19T15:11:47+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -355,7 +355,43 @@
    ],
    "orcamentos": [],
    "obs": "Procurar o Elenilton da montagem para fazer o levantamento de material.",
-   "materiais": [],
+   "materiais": [
+    {
+     "desc": "Cantoneira laminada A/I 304 2\" x 1/8\" — 12 barras de 6 m",
+     "cod": "33781",
+     "qtd": 72.0,
+     "un": "M",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Barra chata A/I 304 1.1/2\" x 1/8\" — 13 barras de 6 m",
+     "cod": "33841",
+     "qtd": 78.0,
+     "un": "M",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Corte de chapa A/I 304 300 x 350 x 8 mm",
+     "cod": "A cadastrar",
+     "qtd": 8.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Tubo retangular 40 x 20 A/I 304 x 2 mm — 3 barras de 6 m",
+     "cod": "38239",
+     "qtd": 18.0,
+     "un": "M",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Chapa lisa A/I 304 1.200 x 3.000 x 1,5 mm",
+     "cod": "33811",
+     "qtd": 1.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    }
+   ],
    "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533393775"
@@ -1132,7 +1168,57 @@
    ],
    "orcamentos": [],
    "obs": "Trocar a tubulação de saída da bomba da tremonha para 6\". Verificar com o Elenilton o tipo de tubo (parede) e as medidas exatas.",
-   "materiais": [],
+   "materiais": [
+    {
+     "desc": "Tubo A/I 304 pipe 6\" x 2 mm — 10 barras de 6 m",
+     "cod": "33881",
+     "qtd": 60.0,
+     "un": "M",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Curva A/I 304 90° pipe 6\" x 2 mm",
+     "cod": "32172",
+     "qtd": 7.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Curva A/I 304 45° pipe 6\" x 2 mm",
+     "cod": "A cadastrar",
+     "qtd": 8.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Redução A/I 304 pipe 6\" x 4\" x 2 mm",
+     "cod": "A cadastrar",
+     "qtd": 3.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "União A/I 304 SMS 6\"",
+     "cod": "32208",
+     "qtd": 4.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Chapa piso A/C 1.200 x 3.000 x 1/8\"",
+     "cod": "33835",
+     "qtd": 3.0,
+     "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Viga \"U\" 4\" x 1/4\" — 4 barras de 6 m",
+     "cod": "33759",
+     "qtd": 24.0,
+     "un": "M",
+     "sit": "A solicitar"
+    }
+   ],
    "cotacoes": [],
    "bombas": [],
    "url": "https://messigean18s-team.monday.com/boards/18435486131/pulses/13533427161"
@@ -1220,6 +1306,13 @@
      "cod": "A cadastrar",
      "qtd": 1.0,
      "un": "UN",
+     "sit": "A solicitar"
+    },
+    {
+     "desc": "Tubo A/I 304 pipe 3\" x 2 mm — 4 barras de 6 m",
+     "cod": "46931",
+     "qtd": 24.0,
+     "un": "M",
      "sit": "A solicitar"
     }
    ],
