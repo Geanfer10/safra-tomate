@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-19T19:25:14+00:00",
+ "gerado": "2026-11-20T15:26:24+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -1421,10 +1421,10 @@
      "qtd": 8.0,
      "un": "UN",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 180.0,
+     "vtot": 1440.0,
+     "forn": "Centroeste Inox",
+     "prop": "14644"
     },
     {
      "desc": "Redução A/I 304 pipe 6\" x 4\" x 2 mm",
@@ -1465,10 +1465,10 @@
      "qtd": 24.0,
      "un": "M",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 110.83,
+     "vtot": 2660.0,
+     "forn": "Centroeste Inox",
+     "prop": "14644"
     }
    ],
    "cotacoes": [],
@@ -1510,10 +1510,10 @@
      "qtd": 18.0,
      "un": "M",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 810.0,
+     "vtot": 14580.0,
+     "forn": "Centroeste Inox",
+     "prop": "14644"
     },
     {
      "desc": "Caps A/I 304 pipe 10\" x 2 mm",
@@ -1532,10 +1532,10 @@
      "qtd": 78.0,
      "un": "M",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 640.0,
+     "vtot": 49920.0,
+     "forn": "Centroeste Inox",
+     "prop": "14644"
     },
     {
      "desc": "Curva A/I 304 90° pipe 8\" x 2 mm",
@@ -1565,10 +1565,10 @@
      "qtd": 4.0,
      "un": "UN",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 750.0,
+     "vtot": 3000.0,
+     "forn": "Centroeste Inox",
+     "prop": "14644"
     },
     {
      "desc": "Pestana A/I 304 8\" x 2 mm",
@@ -1598,10 +1598,10 @@
      "qtd": 24.0,
      "un": "M",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 166.0,
+     "vtot": 3984.0,
+     "forn": "Centroeste Inox",
+     "prop": "14644"
     }
    ],
    "cotacoes": [],
