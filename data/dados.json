@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-20T15:26:24+00:00",
+ "gerado": "2026-11-24T15:26:48+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -291,7 +291,12 @@
      "url": "data/arquivos/13533408459/3383476958-WhatsApp-Image-2026-11-11-at-11.34.29.jpg"
     }
    ],
-   "orcamentos": [],
+   "orcamentos": [
+    {
+     "nome": "Goias Verde-0103777103.pdf",
+     "url": "data/arquivos/13533408459/3408208362-Goias-Verde-0103777103.pdf"
+    }
+   ],
    "obs": "Comprar um redutor igual ao da tremonha 2 para instalar na tremonha 01. Foto: redutor de referência (circulado).",
    "materiais": [],
    "cotacoes": [],
