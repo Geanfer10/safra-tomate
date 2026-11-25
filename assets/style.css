@@ -350,3 +350,7 @@ table.cot tr.cot-obs td{font-size:11.5px;color:var(--muted);padding-top:0;border
 .mat .emcot{font-size:.78em;color:var(--ele);font-weight:600}
 #matKpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
 .kpi.tot .v{font-size:clamp(17px,1.5vw,21px);white-space:nowrap}
+.orc-q{display:grid;gap:1px;margin-top:3px;font-size:11.5px;color:var(--muted)}
+.orc-q span{display:flex;justify-content:space-between;gap:10px;white-space:nowrap}
+.orc-q i{font-style:normal}
+.orc-q b{font-weight:600;color:var(--fg)}

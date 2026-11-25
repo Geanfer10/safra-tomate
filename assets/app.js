@@ -79,7 +79,15 @@ function prepOrc(d){
 const prep=l=>(l||[]).map(prepOrc);
 const faixaR=(a,b)=>!a&&!b?"—":Math.round(a*100)===Math.round(b*100)?brl(a):`${brl(a)} – ${brl(b)}`;
 const sMin=l=>sum(l,d=>d.pMin), sMax=l=>sum(l,d=>d.pMax);
-function celOrc(d){
+// Quebra por item (ex.: soprador × rotores) quando a atividade tem poucos materiais com preço
+function quebraMat(d){
+  const P=(d.materiais||[]).filter(m=>m.vtot>0);
+  if(!P.length||P.length>4)return "";
+  const curto=t=>{t=String(t).split(/\s[–-]\s/)[0];return t.length>34?t.slice(0,33)+"…":t};
+  return `<div class="orc-q">${P.map(m=>`<span><i>${esc(curto(m.desc))}${m.qtd>1?` (${m.qtd.toLocaleString("pt-BR")})`:""}</i><b class="num">${brl(m.vtot)}</b></span>`).join("")}</div>`;
+}
+function celOrc(d){return celOrc0(d).replace(/<\/div>$/,m=>quebraMat(d)+m)+(/<\/div>$/.test(celOrc0(d))?"":quebraMat(d))}
+function celOrc0(d){
   if(!d.orcTipo)return "—";
   if(d.orcTipo==="aprovado")return `<div class="orc"><span class="orc-tag ok">Aprovado</span><b class="num">${brl(d.pMin)}</b></div>`;
   if(d.orcTipo==="cotado")return `<div class="orc"><span class="orc-tag">Orçado · ${d.orcN} cotaç${d.orcN>1?"ões":"ão"}</span><b class="num">${faixaR(d.pMin,d.pMax)}</b></div>`;
