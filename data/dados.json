@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-24T15:26:48+00:00",
+ "gerado": "2026-11-25T20:05:19+00:00",
  "itens": [
   {
    "id": "13292601481",
@@ -1273,10 +1273,10 @@
      "qtd": 1.0,
      "un": "UN",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 36850.0,
+     "vtot": 36850.0,
+     "forn": "Mackven (Aeromack)",
+     "prop": "LK-00800/2026"
     },
     {
      "desc": "Rotor para soprador CRE 05D",
@@ -1284,10 +1284,10 @@
      "qtd": 2.0,
      "un": "PÇ",
      "sit": "A solicitar",
-     "vunit": null,
-     "vtot": null,
-     "forn": "",
-     "prop": ""
+     "vunit": 3800.0,
+     "vtot": 7600.0,
+     "forn": "Mackven (Aeromack)",
+     "prop": "LK-00800/2026"
     }
    ],
    "cotacoes": [
